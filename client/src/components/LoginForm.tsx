@@ -4,9 +4,11 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
 import { apiRequest } from '@/lib/queryClient';
+import { useAuth } from '@/hooks/useAuth';
 
 export function LoginForm() {
   const { toast } = useToast();
+  const { login } = useAuth();
   const [credentials, setCredentials] = useState({
     email: '',
     password: ''
@@ -17,8 +19,8 @@ export function LoginForm() {
     e.preventDefault();
     setIsLoading(true);
     try {
-      await apiRequest('POST', '/api/login', credentials);
-      window.location.href = '/'; // Redirect to home on successful login
+      const response = await apiRequest('POST', '/api/login', credentials);
+      login(response.user);
     } catch (error: any) {
       toast({
         title: "Erro no Login",
