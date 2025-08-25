@@ -29,8 +29,7 @@ export function getSession() {
       httpOnly: true,
       secure: true, // HTTPS é obrigatório com SameSite='none'
       maxAge: sessionTtl,
-      sameSite: 'none',
-      domain: 'onrender.com', // Domínio pai para permitir cookies entre subdomínios
+      sameSite: 'none', // Permite que o cookie seja enviado de diferentes domínios (necessário para o Render)
     },
   });
 }
