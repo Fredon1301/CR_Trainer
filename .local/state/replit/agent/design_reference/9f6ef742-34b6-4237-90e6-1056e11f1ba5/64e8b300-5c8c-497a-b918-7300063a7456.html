@@ -1,0 +1,701 @@
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clash Royale Trainer - Melhore suas Habilidades</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'game-dark': '#1a1b23',
+                        'game-card': '#2d3142',
+                        'game-muted': '#4f5d75',
+                        'game-text': '#bfc0c0',
+                        'game-orange': '#ff6b35',
+                        'game-yellow': '#f7931e',
+                    },
+                    fontFamily: {
+                        'game': ['Inter', 'sans-serif'],
+                        'card': ['Roboto Condensed', 'sans-serif'],
+                    }
+                }
+            }
+        };
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto+Condensed:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-game-dark text-game-text font-game min-h-screen">
+    <!-- @COMPONENT: Header [navigation, language toggle, auth] -->
+    <header class="bg-game-card border-b border-game-muted sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo and Brand -->
+                <div class="flex items-center space-x-4">
+                    <div class="flex items-center space-x-2">
+                        <i class="fas fa-crown text-game-orange text-2xl"></i>
+                        <h1 class="text-xl font-bold text-white">CR Trainer</h1>
+                    </div>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="text-game-orange font-medium" data-nav="home">Início</a>
+                    <a href="#training" class="hover:text-game-orange transition-colors" data-nav="training">Treinamento</a>
+                    <a href="#cards" class="hover:text-game-orange transition-colors" data-nav="cards">Cartas</a>
+                    <a href="#clans" class="hover:text-game-orange transition-colors" data-nav="clans">Clãs</a>
+                    <a href="#tournaments" class="hover:text-game-orange transition-colors" data-nav="tournaments">Torneios</a>
+                </nav>
+
+                <!-- Language Toggle and Auth -->
+                <div class="flex items-center space-x-4">
+                    <!-- Language Toggle -->
+                    <div class="flex items-center space-x-2 bg-game-muted rounded-lg p-1">
+                        <button class="flag-toggle active px-2 py-1 rounded text-sm bg-game-orange text-white" data-lang="pt-BR">
+                            🇧🇷 PT
+                        </button>
+                        <button class="flag-toggle px-2 py-1 rounded text-sm text-game-text hover:bg-game-card transition-colors" data-lang="en-US">
+                            🇺🇸 EN
+                        </button>
+                    </div>
+
+                    <!-- Auth Buttons -->
+                    <div class="hidden md:flex items-center space-x-2">
+                        <button class="px-4 py-2 text-sm border border-game-muted rounded-lg hover:border-game-orange transition-colors" data-modal="login">
+                            Entrar
+                        </button>
+                        <button class="px-4 py-2 text-sm bg-game-orange text-white rounded-lg hover:bg-opacity-90 transition-colors" data-modal="register">
+                            Registrar
+                        </button>
+                    </div>
+
+                    <!-- Mobile Menu Button -->
+                    <button class="md:hidden text-game-text hover:text-white" data-mobile-menu="toggle">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div class="md:hidden bg-game-card border-t border-game-muted hidden" data-mobile-menu="panel">
+            <div class="px-4 py-4 space-y-4">
+                <a href="#home" class="block text-game-orange font-medium">Início</a>
+                <a href="#training" class="block hover:text-game-orange transition-colors">Treinamento</a>
+                <a href="#cards" class="block hover:text-game-orange transition-colors">Cartas</a>
+                <a href="#clans" class="block hover:text-game-orange transition-colors">Clãs</a>
+                <a href="#tournaments" class="block hover:text-game-orange transition-colors">Torneios</a>
+                <div class="flex space-x-2 pt-4 border-t border-game-muted">
+                    <button class="flex-1 px-4 py-2 text-sm border border-game-muted rounded-lg">Entrar</button>
+                    <button class="flex-1 px-4 py-2 text-sm bg-game-orange text-white rounded-lg">Registrar</button>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- @END_COMPONENT: Header -->
+
+    <!-- @COMPONENT: HeroSection [welcome message, main CTAs] -->
+    <section class="relative py-20 lg:py-32 overflow-hidden">
+        <!-- Background with gaming pattern -->
+        <div class="absolute inset-0 bg-gradient-to-br from-game-dark via-game-card to-game-dark opacity-50"></div>
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="space-y-8">
+                <div class="space-y-4">
+                    <h1 class="text-4xl lg:text-6xl font-bold text-white leading-tight">
+                        Domine o <span class="text-game-orange">Clash Royale</span>
+                    </h1>
+                    <p class="text-xl lg:text-2xl text-game-text max-w-3xl mx-auto">
+                        Treine suas habilidades, memorize custos de elixir e acompanhe dados de clãs em tempo real.
+                    </p>
+                </div>
+
+                <!-- Main Action Buttons -->
+                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center max-w-md mx-auto">
+                    <button class="w-full sm:w-auto px-8 py-4 bg-game-orange text-white rounded-xl font-semibold text-lg hover:bg-opacity-90 transition-all transform hover:scale-105" data-action="start-training">
+                        <i class="fas fa-play mr-2"></i>
+                        Começar Treinamento
+                    </button>
+                    <button class="w-full sm:w-auto px-8 py-4 border-2 border-game-orange text-game-orange rounded-xl font-semibold text-lg hover:bg-game-orange hover:text-white transition-all" data-action="explore-cards">
+                        <i class="fas fa-cards-blank mr-2"></i>
+                        Explorar Cartas
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: HeroSection -->
+
+    <!-- @COMPONENT: TrainingModes [elixir training options] -->
+    <section class="py-20 bg-gradient-to-b from-game-dark to-game-card">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl lg:text-4xl font-bold text-white mb-4">Modos de Treinamento</h2>
+                <p class="text-xl text-game-text">Escolha como deseja treinar suas habilidades no Clash Royale</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 lg:gap-12">
+                <!-- Grid Training Mode -->
+                <div class="bg-game-card rounded-2xl p-8 border border-game-muted hover:border-game-orange transition-all group">
+                    <div class="text-center space-y-6">
+                        <div class="w-20 h-20 bg-game-orange bg-opacity-20 rounded-2xl flex items-center justify-center mx-auto group-hover:scale-110 transition-transform">
+                            <i class="fas fa-th-large text-3xl text-game-orange"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-white mb-3">Memorização de Elixir</h3>
+                            <p class="text-game-text mb-6">
+                                Grade com todas as cartas do seu banco de dados. Visualize cartas e teste seu conhecimento sobre custos de elixir.
+                            </p>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-center text-sm text-game-text">
+                                <i class="fas fa-check text-green-400 mr-2"></i>
+                                Grade interativa de cartas
+                            </div>
+                            <div class="flex items-center justify-center text-sm text-game-text">
+                                <i class="fas fa-check text-green-400 mr-2"></i>
+                                Pop-ups com detalhes das cartas
+                            </div>
+                            <div class="flex items-center justify-center text-sm text-game-text">
+                                <i class="fas fa-check text-green-400 mr-2"></i>
+                                Teste de conhecimento
+                            </div>
+                        </div>
+                        <button class="w-full py-4 bg-game-orange text-white rounded-xl font-semibold hover:bg-opacity-90 transition-colors" data-mode="grid-training">
+                            Começar Grade de Memorização
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Random Simulation Mode -->
+                <div class="bg-game-card rounded-2xl p-8 border border-game-muted hover:border-game-orange transition-all group">
+                    <div class="text-center space-y-6">
+                        <div class="w-20 h-20 bg-game-yellow bg-opacity-20 rounded-2xl flex items-center justify-center mx-auto group-hover:scale-110 transition-transform">
+                            <i class="fas fa-random text-3xl text-game-yellow"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-white mb-3">Simulação Aleatória</h3>
+                            <p class="text-game-text mb-6">
+                                Cartas aleatórias aparecem e você deve adivinhar o custo de elixir. Perfeito para treinar rapidez de reação.
+                            </p>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-center text-sm text-game-text">
+                                <i class="fas fa-check text-green-400 mr-2"></i>
+                                Cartas aleatórias
+                            </div>
+                            <div class="flex items-center justify-center text-sm text-game-text">
+                                <i class="fas fa-check text-green-400 mr-2"></i>
+                                Cronômetro de reação
+                            </div>
+                            <div class="flex items-center justify-center text-sm text-game-text">
+                                <i class="fas fa-check text-green-400 mr-2"></i>
+                                Sistema de pontuação
+                            </div>
+                        </div>
+                        <button class="w-full py-4 bg-game-yellow text-white rounded-xl font-semibold hover:bg-opacity-90 transition-colors" data-mode="simulation-training">
+                            Começar Simulação
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: TrainingModes -->
+
+    <!-- @COMPONENT: FeaturesOverview [API features, clan data, tournaments] -->
+    <section class="py-20 bg-game-dark">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl lg:text-4xl font-bold text-white mb-4">Recursos Avançados</h2>
+                <p class="text-xl text-game-text">Conecte-se com a API oficial do Clash Royale para dados em tempo real</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Clan Wars Feature -->
+                <div class="bg-game-card rounded-2xl p-6 border border-game-muted text-center space-y-4">
+                    <div class="w-16 h-16 bg-purple-500 bg-opacity-20 rounded-xl flex items-center justify-center mx-auto">
+                        <i class="fas fa-shield-alt text-2xl text-purple-400"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white">Guerras de Clãs</h3>
+                    <p class="text-game-text">
+                        Acompanhe histórico de guerras, estatísticas atuais e logs detalhados do seu clã.
+                    </p>
+                    <button class="w-full py-3 bg-purple-500 text-white rounded-lg hover:bg-purple-600 transition-colors" data-feature="clan-wars">
+                        Ver Guerras
+                    </button>
+                </div>
+
+                <!-- Player Stats Feature -->
+                <div class="bg-game-card rounded-2xl p-6 border border-game-muted text-center space-y-4">
+                    <div class="w-16 h-16 bg-blue-500 bg-opacity-20 rounded-xl flex items-center justify-center mx-auto">
+                        <i class="fas fa-user-crown text-2xl text-blue-400"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white">Estatísticas de Jogador</h3>
+                    <p class="text-game-text">
+                        Consulte perfis de jogadores, troféus, decks favoritos e histórico de batalhas.
+                    </p>
+                    <button class="w-full py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors" data-feature="player-stats">
+                        Ver Estatísticas
+                    </button>
+                </div>
+
+                <!-- Tournaments Feature -->
+                <div class="bg-game-card rounded-2xl p-6 border border-game-muted text-center space-y-4">
+                    <div class="w-16 h-16 bg-green-500 bg-opacity-20 rounded-xl flex items-center justify-center mx-auto">
+                        <i class="fas fa-trophy text-2xl text-green-400"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white">Torneios</h3>
+                    <p class="text-game-text">
+                        Encontre torneios ativos, rankings globais e informações de competições.
+                    </p>
+                    <button class="w-full py-3 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors" data-feature="tournaments">
+                        Ver Torneios
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: FeaturesOverview -->
+
+    <!-- @COMPONENT: CardPreview [sample cards grid] -->
+    <section class="py-20 bg-gradient-to-b from-game-card to-game-dark">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl lg:text-4xl font-bold text-white mb-4">Banco de Cartas</h2>
+                <p class="text-xl text-game-text">Explore nossa coleção de cartas do Clash Royale</p>
+            </div>
+
+            <!-- Sample Cards Grid -->
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6 mb-12">
+                <!-- @MAP: cards.map(card => ( -->
+                <div class="bg-game-card rounded-xl p-4 border border-game-muted hover:border-game-orange transition-all cursor-pointer group" data-card-modal="knight">
+                    <!-- Mock image of a knight card -->
+                    <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&h=250" alt="Cavaleiro" class="w-full h-32 object-cover rounded-lg mb-3 group-hover:scale-105 transition-transform" data-mock="true">
+                    <h4 class="text-white font-semibold text-center text-sm">Cavaleiro</h4>
+                    <div class="flex items-center justify-center mt-2">
+                        <span class="text-game-orange font-bold text-lg">3</span>
+                        <i class="fas fa-tint text-purple-400 ml-1 text-sm"></i>
+                    </div>
+                </div>
+
+                <div class="bg-game-card rounded-xl p-4 border border-game-muted hover:border-game-orange transition-all cursor-pointer group" data-card-modal="archer">
+                    <!-- Mock image of archer card -->
+                    <img src="https://images.unsplash.com/photo-1551698618-1dfe5d97d256?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&h=250" alt="Arqueiras" class="w-full h-32 object-cover rounded-lg mb-3 group-hover:scale-105 transition-transform" data-mock="true">
+                    <h4 class="text-white font-semibold text-center text-sm">Arqueiras</h4>
+                    <div class="flex items-center justify-center mt-2">
+                        <span class="text-game-orange font-bold text-lg">3</span>
+                        <i class="fas fa-tint text-purple-400 ml-1 text-sm"></i>
+                    </div>
+                </div>
+
+                <div class="bg-game-card rounded-xl p-4 border border-game-muted hover:border-game-orange transition-all cursor-pointer group" data-card-modal="dragon">
+                    <!-- Mock image of dragon card -->
+                    <img src="https://pixabay.com/get/g075f171ea798df5ccfb9dcecc81aadb2fcb6e0884a1009f99d40dccd93edc0d5af5127fc60fd54dc4ab7c3d4b52af2b4c1cca90d2398d155471f7be94841945f_1280.jpg" alt="Dragão Bebê" class="w-full h-32 object-cover rounded-lg mb-3 group-hover:scale-105 transition-transform" data-mock="true">
+                    <h4 class="text-white font-semibold text-center text-sm">Dragão Bebê</h4>
+                    <div class="flex items-center justify-center mt-2">
+                        <span class="text-game-orange font-bold text-lg">4</span>
+                        <i class="fas fa-tint text-purple-400 ml-1 text-sm"></i>
+                    </div>
+                </div>
+
+                <div class="bg-game-card rounded-xl p-4 border border-game-muted hover:border-game-orange transition-all cursor-pointer group" data-card-modal="fireball">
+                    <!-- Mock image of fireball spell -->
+                    <img src="https://pixabay.com/get/g4cce81d7b8729d0f7527510111fbde5b359501cd0f6be59d4ce65cbe89a1b035257e776d0c36c53a57b6c4d0d42c87916e3e7c9727cc30dd81b53c7ca40bc0e1_1280.jpg" alt="Bola de Fogo" class="w-full h-32 object-cover rounded-lg mb-3 group-hover:scale-105 transition-transform" data-mock="true">
+                    <h4 class="text-white font-semibold text-center text-sm">Bola de Fogo</h4>
+                    <div class="flex items-center justify-center mt-2">
+                        <span class="text-game-orange font-bold text-lg">4</span>
+                        <i class="fas fa-tint text-purple-400 ml-1 text-sm"></i>
+                    </div>
+                </div>
+
+                <div class="bg-game-card rounded-xl p-4 border border-game-muted hover:border-game-orange transition-all cursor-pointer group" data-card-modal="giant">
+                    <!-- Mock image of giant card -->
+                    <img src="https://pixabay.com/get/gb4cf94fc3e6acdd781bda9a94d5c3ad55ee9e973d7711d76a45322173110aaa1c1e219af772795b6670dba844275598254c0614dfb31dcef6e906dca692f520d_1280.jpg" alt="Gigante" class="w-full h-32 object-cover rounded-lg mb-3 group-hover:scale-105 transition-transform" data-mock="true">
+                    <h4 class="text-white font-semibold text-center text-sm">Gigante</h4>
+                    <div class="flex items-center justify-center mt-2">
+                        <span class="text-game-orange font-bold text-lg">5</span>
+                        <i class="fas fa-tint text-purple-400 ml-1 text-sm"></i>
+                    </div>
+                </div>
+
+                <div class="bg-game-card rounded-xl p-4 border border-game-muted hover:border-game-orange transition-all cursor-pointer group" data-card-modal="wizard">
+                    <!-- Mock image of wizard card -->
+                    <img src="https://pixabay.com/get/g59bbf82b2a0c715f1afeb9f4689690e0ea7ceb8531ed4f4d0629b9d9df435a5bb773fe8143dade5724865bf003f4b501e105559f810f86d33d2a914dee7a98f6_1280.jpg" alt="Mago" class="w-full h-32 object-cover rounded-lg mb-3 group-hover:scale-105 transition-transform" data-mock="true">
+                    <h4 class="text-white font-semibold text-center text-sm">Mago</h4>
+                    <div class="flex items-center justify-center mt-2">
+                        <span class="text-game-orange font-bold text-lg">5</span>
+                        <i class="fas fa-tint text-purple-400 ml-1 text-sm"></i>
+                    </div>
+                </div>
+                <!-- @END_MAP )) -->
+            </div>
+
+            <div class="text-center">
+                <button class="px-8 py-4 bg-game-orange text-white rounded-xl font-semibold text-lg hover:bg-opacity-90 transition-all" data-action="view-all-cards">
+                    Ver Todas as Cartas
+                </button>
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: CardPreview -->
+
+    <!-- @COMPONENT: AdminSection [admin panel preview] -->
+    <section class="py-20 bg-game-dark border-t border-game-muted">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl lg:text-4xl font-bold text-white mb-4">Painel Administrativo</h2>
+                <p class="text-xl text-game-text">Gerencie cartas, usuários e configurações do sistema</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Card Management -->
+                <div class="bg-game-card rounded-xl p-6 border border-game-muted">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-game-orange bg-opacity-20 rounded-lg flex items-center justify-center mr-3">
+                            <i class="fas fa-cards-blank text-game-orange"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-white">Gerenciar Cartas</h3>
+                    </div>
+                    <p class="text-game-text mb-4">Adicione, edite ou remova cartas do banco de dados</p>
+                    <button class="w-full py-3 bg-game-muted text-white rounded-lg hover:bg-game-orange transition-colors" data-admin="cards">
+                        Acessar
+                    </button>
+                </div>
+
+                <!-- User Management -->
+                <div class="bg-game-card rounded-xl p-6 border border-game-muted">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-blue-500 bg-opacity-20 rounded-lg flex items-center justify-center mr-3">
+                            <i class="fas fa-users text-blue-400"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-white">Gerenciar Usuários</h3>
+                    </div>
+                    <p class="text-game-text mb-4">Controle permissões e acesso de usuários</p>
+                    <button class="w-full py-3 bg-game-muted text-white rounded-lg hover:bg-blue-500 transition-colors" data-admin="users">
+                        Acessar
+                    </button>
+                </div>
+
+                <!-- System Settings -->
+                <div class="bg-game-card rounded-xl p-6 border border-game-muted">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-green-500 bg-opacity-20 rounded-lg flex items-center justify-center mr-3">
+                            <i class="fas fa-cog text-green-400"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-white">Configurações</h3>
+                    </div>
+                    <p class="text-game-text mb-4">Ajuste configurações gerais do sistema</p>
+                    <button class="w-full py-3 bg-game-muted text-white rounded-lg hover:bg-green-500 transition-colors" data-admin="settings">
+                        Acessar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: AdminSection -->
+
+    <!-- @COMPONENT: Footer [links, social, info] -->
+    <footer class="bg-game-card border-t border-game-muted py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8">
+                <!-- Brand -->
+                <div class="space-y-4">
+                    <div class="flex items-center space-x-2">
+                        <i class="fas fa-crown text-game-orange text-xl"></i>
+                        <h3 class="text-lg font-bold text-white">CR Trainer</h3>
+                    </div>
+                    <p class="text-game-text text-sm">
+                        A melhor plataforma para treinar suas habilidades no Clash Royale e acompanhar dados em tempo real.
+                    </p>
+                </div>
+
+                <!-- Training -->
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Treinamento</h4>
+                    <ul class="space-y-2 text-sm text-game-text">
+                        <li><a href="#" class="hover:text-game-orange transition-colors">Memorização de Elixir</a></li>
+                        <li><a href="#" class="hover:text-game-orange transition-colors">Simulação Aleatória</a></li>
+                        <li><a href="#" class="hover:text-game-orange transition-colors">Banco de Cartas</a></li>
+                    </ul>
+                </div>
+
+                <!-- API Features -->
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Recursos API</h4>
+                    <ul class="space-y-2 text-sm text-game-text">
+                        <li><a href="#" class="hover:text-game-orange transition-colors">Guerras de Clãs</a></li>
+                        <li><a href="#" class="hover:text-game-orange transition-colors">Estatísticas</a></li>
+                        <li><a href="#" class="hover:text-game-orange transition-colors">Torneios</a></li>
+                    </ul>
+                </div>
+
+                <!-- Support -->
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Suporte</h4>
+                    <ul class="space-y-2 text-sm text-game-text">
+                        <li><a href="#" class="hover:text-game-orange transition-colors">FAQ</a></li>
+                        <li><a href="#" class="hover:text-game-orange transition-colors">Contato</a></li>
+                        <li><a href="#" class="hover:text-game-orange transition-colors">Documentação</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-game-muted mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-sm text-game-text">&copy; 2024 CR Trainer. Todos os direitos reservados.</p>
+                <p class="text-sm text-game-text mt-2 md:mt-0">
+                    Clash Royale é uma marca registrada da Supercell.
+                </p>
+            </div>
+        </div>
+    </footer>
+    <!-- @END_COMPONENT: Footer -->
+
+    <!-- @COMPONENT: CardModal [card details popup] -->
+    <div class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4 hidden" data-modal="card-details">
+        <div class="bg-game-card rounded-2xl p-8 max-w-md w-full border border-game-muted">
+            <div class="text-center space-y-6">
+                <!-- Mock detailed knight card image -->
+                <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=375" alt="Cavaleiro Detalhado" class="w-48 h-60 object-cover rounded-xl mx-auto shadow-lg" data-mock="true">
+                
+                <div class="space-y-3">
+                    <h3 class="text-2xl font-bold text-white" data-bind="card.name">Cavaleiro</h3>
+                    <div class="flex items-center justify-center space-x-4">
+                        <div class="bg-game-orange bg-opacity-20 px-4 py-2 rounded-lg">
+                            <span class="text-game-orange font-bold text-xl" data-bind="card.elixirCost">3</span>
+                            <i class="fas fa-tint text-purple-400 ml-2"></i>
+                        </div>
+                        <div class="bg-game-muted bg-opacity-50 px-4 py-2 rounded-lg">
+                            <span class="text-game-text" data-bind="card.rarity">Comum</span>
+                        </div>
+                    </div>
+                    <p class="text-game-text" data-bind="card.description">
+                        Um guerreiro forte e resistente que luta corpo a corpo. Ideal para defender contra ataques terrestres.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4 text-center">
+                    <div class="bg-game-muted bg-opacity-30 p-3 rounded-lg">
+                        <div class="text-white font-semibold" data-bind="card.hitpoints">1200</div>
+                        <div class="text-sm text-game-text">Vida</div>
+                    </div>
+                    <div class="bg-game-muted bg-opacity-30 p-3 rounded-lg">
+                        <div class="text-white font-semibold" data-bind="card.damage">120</div>
+                        <div class="text-sm text-game-text">Dano</div>
+                    </div>
+                </div>
+
+                <button class="w-full py-3 bg-game-muted text-white rounded-lg hover:bg-game-orange transition-colors" data-modal-close="card-details">
+                    Fechar
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- @END_COMPONENT: CardModal -->
+
+    <!-- @COMPONENT: TrainingSimulator [random card training interface] -->
+    <div class="fixed inset-0 bg-game-dark z-50 flex flex-col hidden" data-simulator="elixir-training">
+        <!-- Simulator Header -->
+        <div class="bg-game-card border-b border-game-muted p-4">
+            <div class="max-w-4xl mx-auto flex justify-between items-center">
+                <div class="flex items-center space-x-4">
+                    <button class="text-game-text hover:text-white" data-simulator-close="elixir-training">
+                        <i class="fas fa-arrow-left text-xl"></i>
+                    </button>
+                    <h2 class="text-xl font-bold text-white">Simulação de Elixir</h2>
+                </div>
+                <div class="flex items-center space-x-6">
+                    <div class="text-center">
+                        <div class="text-2xl font-bold text-game-orange" data-bind="score">0</div>
+                        <div class="text-sm text-game-text">Pontos</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-2xl font-bold text-blue-400" data-bind="timer">30</div>
+                        <div class="text-sm text-game-text">Segundos</div>
+                    </div>
+                    <button class="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors" data-simulator-action="stop">
+                        Parar
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Simulator Content -->
+        <div class="flex-1 flex items-center justify-center p-8">
+            <div class="text-center space-y-8 max-w-md">
+                <!-- Current Card Display -->
+                <div class="space-y-4">
+                    <!-- Mock random card image -->
+                    <img src="https://pixabay.com/get/gc8b26120db979fd3c53e93b874aa40bb52eadf994144a419d3251dafb831bc5453c9a4be7b958c06d01b0be64e23e6e2a758270ba2232f4ea15fec92e3a4d91f_1280.jpg" alt="Carta Atual" class="w-48 h-60 object-cover rounded-xl mx-auto shadow-lg" data-bind="currentCard.image" data-mock="true">
+                    <h3 class="text-3xl font-bold text-white" data-bind="currentCard.name">Dragão Bebê</h3>
+                </div>
+
+                <!-- Elixir Options -->
+                <div class="space-y-4">
+                    <p class="text-xl text-game-text">Qual o custo de elixir desta carta?</p>
+                    <div class="grid grid-cols-5 gap-3">
+                        <!-- @FUNCTIONALITY: These buttons should track user responses and provide immediate feedback -->
+                        <button class="w-12 h-12 bg-game-card border-2 border-game-muted rounded-lg text-white font-bold text-lg hover:border-game-orange transition-colors" data-elixir-guess="1">1</button>
+                        <button class="w-12 h-12 bg-game-card border-2 border-game-muted rounded-lg text-white font-bold text-lg hover:border-game-orange transition-colors" data-elixir-guess="2">2</button>
+                        <button class="w-12 h-12 bg-game-card border-2 border-game-muted rounded-lg text-white font-bold text-lg hover:border-game-orange transition-colors" data-elixir-guess="3">3</button>
+                        <button class="w-12 h-12 bg-game-card border-2 border-game-muted rounded-lg text-white font-bold text-lg hover:border-game-orange transition-colors" data-elixir-guess="4">4</button>
+                        <button class="w-12 h-12 bg-game-card border-2 border-game-muted rounded-lg text-white font-bold text-lg hover:border-game-orange transition-colors" data-elixir-guess="5">5</button>
+                    </div>
+                    <div class="grid grid-cols-4 gap-3 max-w-xs mx-auto">
+                        <button class="w-12 h-12 bg-game-card border-2 border-game-muted rounded-lg text-white font-bold text-lg hover:border-game-orange transition-colors" data-elixir-guess="6">6</button>
+                        <button class="w-12 h-12 bg-game-card border-2 border-game-muted rounded-lg text-white font-bold text-lg hover:border-game-orange transition-colors" data-elixir-guess="7">7</button>
+                        <button class="w-12 h-12 bg-game-card border-2 border-game-muted rounded-lg text-white font-bold text-lg hover:border-game-orange transition-colors" data-elixir-guess="8">8</button>
+                        <button class="w-12 h-12 bg-game-card border-2 border-game-muted rounded-lg text-white font-bold text-lg hover:border-game-orange transition-colors" data-elixir-guess="9">9</button>
+                    </div>
+                </div>
+
+                <!-- Feedback Area -->
+                <div class="space-y-2" data-feedback-area="true">
+                    <div class="text-green-400 font-semibold hidden" data-feedback="correct">
+                        <i class="fas fa-check mr-2"></i>Correto! +10 pontos
+                    </div>
+                    <div class="text-red-400 font-semibold hidden" data-feedback="incorrect">
+                        <i class="fas fa-times mr-2"></i>Incorreto! Era <span data-bind="correctAnswer">4</span> elixir
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- @END_COMPONENT: TrainingSimulator -->
+
+    <script>
+        // TODO: Implement business logic, API calls, and state management
+        (function() {
+            // Language Toggle Functionality
+            const languageToggles = document.querySelectorAll('.flag-toggle');
+            const currentLanguage = 'pt-BR'; // TODO: Get from user preferences or localStorage
+            
+            languageToggles.forEach(toggle => {
+                toggle.addEventListener('click', function() {
+                    const selectedLang = this.dataset.lang;
+                    
+                    // Update active state
+                    languageToggles.forEach(t => {
+                        t.classList.remove('active', 'bg-game-orange', 'text-white');
+                        t.classList.add('text-game-text', 'hover:bg-game-card');
+                    });
+                    
+                    this.classList.add('active', 'bg-game-orange', 'text-white');
+                    this.classList.remove('text-game-text', 'hover:bg-game-card');
+                    
+                    // TODO: Implement language switching logic
+                    console.log('Language switched to:', selectedLang);
+                });
+            });
+
+            // Mobile Menu Toggle
+            const mobileMenuButton = document.querySelector('[data-mobile-menu="toggle"]');
+            const mobileMenuPanel = document.querySelector('[data-mobile-menu="panel"]');
+            
+            if (mobileMenuButton && mobileMenuPanel) {
+                mobileMenuButton.addEventListener('click', function() {
+                    mobileMenuPanel.classList.toggle('hidden');
+                });
+            }
+
+            // Card Modal Functionality
+            const cardElements = document.querySelectorAll('[data-card-modal]');
+            const cardModal = document.querySelector('[data-modal="card-details"]');
+            const cardModalClose = document.querySelector('[data-modal-close="card-details"]');
+            
+            cardElements.forEach(card => {
+                card.addEventListener('click', function() {
+                    const cardId = this.dataset.cardModal;
+                    // TODO: Load card data from database
+                    cardModal.classList.remove('hidden');
+                });
+            });
+            
+            if (cardModalClose) {
+                cardModalClose.addEventListener('click', function() {
+                    cardModal.classList.add('hidden');
+                });
+            }
+
+            // Training Mode Selection
+            const trainingButtons = document.querySelectorAll('[data-mode]');
+            const simulator = document.querySelector('[data-simulator="elixir-training"]');
+            
+            trainingButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const mode = this.dataset.mode;
+                    
+                    if (mode === 'simulation-training') {
+                        simulator.classList.remove('hidden');
+                        // TODO: Initialize training session
+                    } else if (mode === 'grid-training') {
+                        // TODO: Navigate to grid training page
+                        console.log('Starting grid training mode');
+                    }
+                });
+            });
+
+            // Simulator Controls
+            const simulatorClose = document.querySelector('[data-simulator-close="elixir-training"]');
+            const elixirButtons = document.querySelectorAll('[data-elixir-guess]');
+            
+            if (simulatorClose) {
+                simulatorClose.addEventListener('click', function() {
+                    simulator.classList.add('hidden');
+                });
+            }
+            
+            elixirButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const guess = parseInt(this.dataset.elixirGuess);
+                    // TODO: Check answer, update score, load next card
+                    console.log('User guessed:', guess);
+                });
+            });
+
+            // Navigation Highlighting
+            const navLinks = document.querySelectorAll('[data-nav]');
+            
+            function updateActiveNav() {
+                const currentSection = window.location.hash.substring(1) || 'home';
+                
+                navLinks.forEach(link => {
+                    link.classList.remove('text-game-orange', 'font-medium');
+                    link.classList.add('hover:text-game-orange');
+                    
+                    if (link.dataset.nav === currentSection) {
+                        link.classList.add('text-game-orange', 'font-medium');
+                        link.classList.remove('hover:text-game-orange');
+                    }
+                });
+            }
+            
+            window.addEventListener('hashchange', updateActiveNav);
+            updateActiveNav();
+
+            // Admin Panel Access
+            const adminButtons = document.querySelectorAll('[data-admin]');
+            
+            adminButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const section = this.dataset.admin;
+                    // TODO: Check user permissions before allowing access
+                    console.log('Accessing admin section:', section);
+                });
+            });
+
+            // API Feature Buttons
+            const featureButtons = document.querySelectorAll('[data-feature]');
+            
+            featureButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const feature = this.dataset.feature;
+                    // TODO: Implement API calls for clan wars, player stats, tournaments
+                    console.log('Accessing feature:', feature);
+                });
+            });
+        })();
+    </script>
+</body>
+</html>

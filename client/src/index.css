@@ -1,0 +1,243 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Gaming theme colors */
+  --game-dark: hsl(228, 15%, 11%);
+  --game-card: hsl(220, 13%, 18%);
+  --game-muted: hsl(216, 10%, 31%);
+  --game-text: hsl(210, 6%, 76%);
+  --game-orange: hsl(14, 100%, 60%);
+  --game-yellow: hsl(39, 92%, 56%);
+
+  /* Base design system colors */
+  --background: hsl(228, 15%, 11%);
+  --foreground: hsl(210, 6%, 76%);
+  --card: hsl(220, 13%, 18%);
+  --card-foreground: hsl(210, 6%, 76%);
+  --popover: hsl(220, 13%, 18%);
+  --popover-foreground: hsl(210, 6%, 76%);
+  --primary: hsl(14, 100%, 60%);
+  --primary-foreground: hsl(0, 0%, 100%);
+  --secondary: hsl(216, 10%, 31%);
+  --secondary-foreground: hsl(0, 0%, 100%);
+  --muted: hsl(216, 10%, 31%);
+  --muted-foreground: hsl(210, 6%, 76%);
+  --accent: hsl(220, 13%, 18%);
+  --accent-foreground: hsl(14, 100%, 60%);
+  --destructive: hsl(0, 84%, 60%);
+  --destructive-foreground: hsl(0, 0%, 100%);
+  --border: hsl(216, 10%, 31%);
+  --input: hsl(220, 13%, 18%);
+  --ring: hsl(14, 100%, 60%);
+  
+  /* Chart colors */
+  --chart-1: hsl(14, 100%, 60%);
+  --chart-2: hsl(160, 60%, 45%);
+  --chart-3: hsl(39, 92%, 56%);
+  --chart-4: hsl(120, 50%, 50%);
+  --chart-5: hsl(340, 75%, 55%);
+  
+  /* Sidebar colors */
+  --sidebar: hsl(220, 13%, 18%);
+  --sidebar-foreground: hsl(210, 6%, 76%);
+  --sidebar-primary: hsl(14, 100%, 60%);
+  --sidebar-primary-foreground: hsl(0, 0%, 100%);
+  --sidebar-accent: hsl(220, 13%, 18%);
+  --sidebar-accent-foreground: hsl(14, 100%, 60%);
+  --sidebar-border: hsl(216, 10%, 31%);
+  --sidebar-ring: hsl(14, 100%, 60%);
+  
+  /* Typography */
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-card: 'Roboto Condensed', system-ui, -apple-system, sans-serif;
+  --font-display: 'Oxanium', system-ui, -apple-system, sans-serif;
+  
+  /* Design tokens */
+  --radius: 0.75rem;
+  --spacing: 0.25rem;
+}
+
+.dark {
+  /* Dark mode already defined as default */
+  --background: hsl(228, 15%, 11%);
+  --foreground: hsl(210, 6%, 76%);
+  --card: hsl(220, 13%, 18%);
+  --card-foreground: hsl(210, 6%, 76%);
+  --popover: hsl(220, 13%, 18%);
+  --popover-foreground: hsl(210, 6%, 76%);
+  --primary: hsl(14, 100%, 60%);
+  --primary-foreground: hsl(0, 0%, 100%);
+  --secondary: hsl(216, 10%, 31%);
+  --secondary-foreground: hsl(0, 0%, 100%);
+  --muted: hsl(216, 10%, 31%);
+  --muted-foreground: hsl(210, 6%, 76%);
+  --accent: hsl(220, 13%, 18%);
+  --accent-foreground: hsl(14, 100%, 60%);
+  --destructive: hsl(0, 84%, 60%);
+  --destructive-foreground: hsl(0, 0%, 100%);
+  --border: hsl(216, 10%, 31%);
+  --input: hsl(220, 13%, 18%);
+  --ring: hsl(14, 100%, 60%);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased;
+    background-color: var(--game-dark);
+    color: var(--game-text);
+    font-family: var(--font-sans);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+  }
+}
+
+@layer components {
+  /* Gaming theme component utilities */
+  .bg-game-dark {
+    background-color: var(--game-dark);
+  }
+
+  .bg-game-card {
+    background-color: var(--game-card);
+  }
+
+  .bg-game-muted {
+    background-color: var(--game-muted);
+  }
+
+  .bg-game-orange {
+    background-color: var(--game-orange);
+  }
+
+  .bg-game-yellow {
+    background-color: var(--game-yellow);
+  }
+
+  .text-game-text {
+    color: var(--game-text);
+  }
+
+  .text-game-orange {
+    color: var(--game-orange);
+  }
+
+  .text-game-yellow {
+    color: var(--game-yellow);
+  }
+
+  .border-game-muted {
+    border-color: var(--game-muted);
+  }
+
+  .border-game-orange {
+    border-color: var(--game-orange);
+  }
+
+  .font-game {
+    font-family: var(--font-sans);
+  }
+
+  .font-card {
+    font-family: var(--font-card);
+  }
+
+  .font-display {
+    font-family: var(--font-display);
+  }
+
+  /* Card hover effects */
+  .card-hover-effect {
+    @apply transition-all duration-300 ease-in-out;
+  }
+
+  .card-hover-effect:hover {
+    @apply transform scale-105 shadow-lg;
+    border-color: var(--game-orange);
+  }
+
+  /* Gaming button styles */
+  .btn-gaming {
+    @apply relative overflow-hidden transition-all duration-300;
+  }
+
+  .btn-gaming:hover {
+    @apply shadow-lg transform -translate-y-1;
+  }
+
+  .btn-gaming::before {
+    content: '';
+    @apply absolute inset-0 opacity-0 transition-opacity duration-300;
+    background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%);
+    transform: translateX(-100%);
+  }
+
+  .btn-gaming:hover::before {
+    @apply opacity-100;
+    animation: shimmer 0.6s ease-out;
+  }
+
+  @keyframes shimmer {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+  }
+
+  /* Gaming gradient backgrounds */
+  .gaming-gradient-1 {
+    background: linear-gradient(135deg, var(--game-dark) 0%, var(--game-card) 50%, var(--game-dark) 100%);
+  }
+
+  .gaming-gradient-2 {
+    background: linear-gradient(135deg, var(--game-card) 0%, var(--game-muted) 100%);
+  }
+
+  /* Elixir drop animation */
+  .elixir-drop {
+    @apply inline-block;
+    animation: elixir-glow 2s ease-in-out infinite alternate;
+  }
+
+  @keyframes elixir-glow {
+    0% {
+      filter: drop-shadow(0 0 5px rgba(147, 51, 234, 0.5));
+    }
+    100% {
+      filter: drop-shadow(0 0 15px rgba(147, 51, 234, 0.8));
+    }
+  }
+}
+
+@layer utilities {
+  /* Responsive text utilities */
+  .text-responsive-xl {
+    @apply text-xl md:text-2xl lg:text-3xl;
+  }
+
+  .text-responsive-2xl {
+    @apply text-2xl md:text-3xl lg:text-4xl;
+  }
+
+  .text-responsive-4xl {
+    @apply text-3xl md:text-4xl lg:text-6xl;
+  }
+
+  /* Gaming spacing */
+  .gaming-section-padding {
+    @apply py-16 lg:py-24;
+  }
+
+  .gaming-container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+}
