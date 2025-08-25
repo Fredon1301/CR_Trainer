@@ -27,8 +27,10 @@ export function getSession() {
     saveUninitialized: false,
     cookie: {
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production', // HTTPS apenas em produção
+      secure: true, // HTTPS é obrigatório com SameSite='none'
       maxAge: sessionTtl,
+      sameSite: 'none',
+      domain: 'onrender.com', // Domínio pai para permitir cookies entre subdomínios
     },
   });
 }
