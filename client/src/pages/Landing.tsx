@@ -177,23 +177,33 @@ export default function Landing() {
 
           <div className="border-t border-game-muted mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
             <p className="text-sm text-game-text">{t('landing.rightsReserved')}</p>
-                        {/* <p className="text-sm text-game-text mt-2 md:mt-0">
-              {t('common.supercellDisclaimer').split('Supercell’s Fan Content Policy.').map((part, index) => (
-                <span key={index}>
-                  {part}
-                  {index === 0 && (
+                        <p className="text-sm text-game-text mt-2 md:mt-0">
+              {(() => {
+                const disclaimer = t('common.supercellDisclaimer');
+                const policy = t('common.supercellPolicy');
+                const policyUrl = t('common.supercellPolicyUrl');
+                const policyIndex = disclaimer.indexOf(policy);
+
+                if (policyIndex === -1) {
+                  return disclaimer;
+                }
+
+                return (
+                  <>
+                    {disclaimer.substring(0, policyIndex)}
                     <a
-                      href={t('common.supercellPolicyUrl')}
+                      href={policyUrl}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-game-orange hover:underline inline-flex items-center"
                     >
-                      Supercell’s Fan Content Policy. <ExternalLink className="ml-1 h-3 w-3" />
+                      {policy} <ExternalLink className="ml-1 h-3 w-3" />
                     </a>
-                  )}
-                </span>
-              ))}
-            </p> */}
+                    {disclaimer.substring(policyIndex + policy.length)}
+                  </>
+                );
+              })()}
+            </p>
           </div>
         </div>
       </footer>

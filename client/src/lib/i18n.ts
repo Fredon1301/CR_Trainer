@@ -27,7 +27,7 @@ export const translations = {
       faq: 'FAQ',
       contact: 'Contato',
       documentation: 'Documentação',
-      rightsReserved: '© 2024 CR Trainer. Todos os direitos reservados.'
+      rightsReserved: '© 2025 CR Trainer. Todos os direitos reservados.'
     },
     training: {
       title: 'Modos de Treinamento',
@@ -178,6 +178,7 @@ export const translations = {
       descriptionEn: 'Descrição (EN-US)',
       loginToContinue: 'Entrar para Continuar',
       supercellDisclaimer: 'Este conteúdo não é afiliado, endossado, patrocinado ou especificamente aprovado pela Supercell e a Supercell não é responsável por ele. Para mais informações, consulte a Política de Conteúdo de Fã da Supercell.',
+      supercellPolicy: 'Política de Conteúdo de Fã da Supercell.',
       supercellPolicyUrl: 'https://www.supercell.com/fan-content-policy'
     },
     faq: {
@@ -232,7 +233,7 @@ export const translations = {
       faq: 'FAQ',
       contact: 'Contact',
       documentation: 'Documentation',
-      rightsReserved: '© 2024 CR Trainer. All rights reserved.'
+      rightsReserved: '© 2025 CR Trainer. All rights reserved.'
     },
     training: {
       title: 'Training Modes',
@@ -383,6 +384,7 @@ export const translations = {
       descriptionEn: 'Description (EN-US)',
       loginToContinue: 'Login to Continue',
       supercellDisclaimer: 'This content is not affiliated with, endorsed, sponsored, or specifically approved by Supercell and Supercell is not responsible for it. For more information see Supercell\'s Fan Content Policy.',
+      supercellPolicy: 'Supercell\'s Fan Content Policy.',
       supercellPolicyUrl: 'https://www.supercell.com/fan-content-policy'
     },
     faq: {
