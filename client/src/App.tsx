@@ -3,6 +3,7 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { LanguageProvider } from "./hooks/useLanguage";
+import { SpeedInsights } from "@vercel/speed-insights/next"
 import { queryClient } from "./lib/queryClient";
 import Landing from "@/pages/Landing";
 import Home from "@/pages/Home";
@@ -19,6 +20,8 @@ import NotFound from "@/pages/not-found";
 function Router() {
   return (
     <Switch>
+      
+        <SpeedInsights />
       <Route path="/" component={Landing} />
       <Route path="/home" component={Home} />
       <Route path="/cards" component={Cards} />
