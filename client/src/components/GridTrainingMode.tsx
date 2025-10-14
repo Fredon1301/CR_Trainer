@@ -5,7 +5,17 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import Header from '@/components/Header';
 import { ArrowLeft, Eye, EyeOff, RotateCcw, Target, Droplets } from 'lucide-react';
-import type { Card as CardType } from '@shared/schema';
+interface CardType {
+  id: any;
+  name: string;
+  nameEn?: string;
+  iconUrls: {
+    medium: string;
+  };
+  elixirCost: number;
+  rarity: string;
+  maxLevel: number;
+}
 
 interface GridTrainingModeProps {
   cards: CardType[];

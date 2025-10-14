@@ -15,7 +15,32 @@ import { apiRequest } from '@/lib/queryClient';
 import { isUnauthorizedError } from '@/lib/authUtils';
 import Header from '@/components/Header';
 import { Plus, Edit, Trash2, Users, Settings } from 'lucide-react';
-import type { Card as CardType, InsertCard } from '@shared/schema';
+interface CardType {
+  id: string;
+  name: string;
+  nameEn: string;
+  elixirCost: number;
+  rarity: string;
+  type: string;
+  description: string | null;
+  descriptionEn: string | null;
+  hitpoints: number | null;
+  damage: number | null;
+  imageUrl: string | null;
+}
+
+interface InsertCard {
+  name: string;
+  nameEn: string;
+  elixirCost: number;
+  rarity: string;
+  type: string;
+  description: string;
+  descriptionEn: string;
+  hitpoints?: number;
+  damage?: number;
+  imageUrl: string;
+}
 
 export default function Admin() {
   const { user, isAuthenticated } = useAuth();

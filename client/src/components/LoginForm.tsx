@@ -20,7 +20,8 @@ export function LoginForm() {
     setIsLoading(true);
     try {
       const response = await apiRequest('POST', '/api/login', credentials);
-      login(response.user);
+      const data = await response.json();
+      login(data.user);
     } catch (error: any) {
       toast({
         title: "Erro no Login",

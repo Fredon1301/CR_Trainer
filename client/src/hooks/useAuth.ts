@@ -1,13 +1,16 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import type { User } from "../../shared/schema";
-import { getQueryFn } from "../lib/queryClient";
+interface User {
+  permission: number;
+  name: string;
+  email: string;
+}
 
 export function useAuth() {
   const queryClient = useQueryClient();
   const { data: user, status } = useQuery<User>({
     queryKey: ["/api/auth/user"],
     queryFn: getQueryFn({ on401: "returnNull" }),
-    onError: (error) => {
+    onError: (error: any) => {
       if (!error.message.startsWith("401")) {
         console.error("Error fetching user:", error);
       }

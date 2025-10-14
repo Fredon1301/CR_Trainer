@@ -30,7 +30,7 @@ export const getQueryFn: <T>(options: {
   ({ on401: unauthorizedBehavior }) =>
   async ({ queryKey }) => {
     let url = queryKey[0] as string;
-    const params = queryKey[1]; // Assuming the second element is the params object
+    const params = queryKey[1] as Record<string, any>; // Assuming the second element is the params object
 
     if (params && typeof params === 'object') {
       const searchParams = new URLSearchParams();

@@ -10,7 +10,7 @@ export default function Landing() {
 
   const handleStartTraining = () => {
     // Training requires login, so redirect to login page
-    setLocation('/login');
+    setLocation('/training');
   };
 
   const handleExploreCards = () => {

@@ -2,7 +2,17 @@ import { useLanguage } from '@/hooks/useLanguage';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Droplets, Heart, Sword } from 'lucide-react';
-import type { Card } from '@shared/schema';
+interface Card {
+  name: string;
+  nameEn: string;
+  description: string;
+  descriptionEn: string;
+  imageUrl?: string;
+  elixirCost: number;
+  rarity: string;
+  hitpoints?: number;
+  damage?: number;
+}
 
 interface CardModalProps {
   card: Card;

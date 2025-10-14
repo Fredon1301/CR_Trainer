@@ -3,7 +3,14 @@ import { useLanguage } from '@/hooks/useLanguage';
 import { useToast } from '@/hooks/use-toast';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, Clock, Target, RotateCcw } from 'lucide-react';
-import type { Card } from '@shared/schema';
+interface Card {
+  name: string;
+  nameEn?: string;
+  iconUrls: {
+    medium: string;
+  };
+  elixirCost: number;
+}
 
 interface TrainingSimulatorProps {
   cards: Card[];
