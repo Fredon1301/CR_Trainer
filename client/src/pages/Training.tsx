@@ -31,7 +31,7 @@ export default function Training() {
     cardCount: 2,
   });
 
-  const cards = cardsData.items as CardType[];
+  const cards = (cardsData.items as CardType[]).filter(card => card.elixirCost !== undefined);
 
   if (activeMode === 'grid') {
     return <GridTrainingMode cards={cards || []} onExit={() => setActiveMode(null)} />;

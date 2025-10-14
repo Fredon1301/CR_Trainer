@@ -200,7 +200,7 @@ export function GridTrainingMode({ cards, onExit }: GridTrainingModeProps) {
                   {cardState.isRevealed || !gameStarted ? (
                     <div className="flex items-center">
                       <span className="text-game-orange font-bold text-lg mr-1">
-                        {cardState.card.elixirCost ?? '?’}
+                        {cardState.card.elixirCost ?? '?'}
                       </span>
                       <Droplets className="text-purple-400 h-4 w-4" />
                     </div>
@@ -221,7 +221,7 @@ export function GridTrainingMode({ cards, onExit }: GridTrainingModeProps) {
           <div className="mt-8 text-center">
             <div className="bg-game-card border-game-muted rounded-lg p-4 inline-block">
               <p className="text-game-text">
-                {t('training.gridMode.revealedCards')}: {cardStates.filter(state => state.isRevealed).length} / {cardStates.length}
+                {`${t('training.gridMode.revealedCards')}: ${cardStates.filter(state => state.isRevealed).length} / ${cardStates.length}`}
               </p>
             </div>
           </div>
@@ -247,7 +247,7 @@ export function GridTrainingMode({ cards, onExit }: GridTrainingModeProps) {
               )}
               <div className="flex items-center justify-center mb-4">
                 <span className="text-game-orange font-bold text-3xl mr-2">
-                  {selectedCard.elixirCost ?? '?’}
+                  {selectedCard.elixirCost ?? '?'}
                 </span>
                 <Droplets className="text-purple-400 h-8 w-8" />
               </div>

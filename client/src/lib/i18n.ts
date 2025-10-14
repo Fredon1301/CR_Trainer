@@ -382,7 +382,7 @@ export const translations = {
       descriptionPt: 'Description (PT-BR)',
       descriptionEn: 'Description (EN-US)',
       loginToContinue: 'Login to Continue',
-      supercellDisclaimer: 'This content is not affiliated with, endorsed, sponsored, or specifically approved by Supercell and Supercell is not responsible for it. For more information see Supercell’s Fan Content Policy.',
+      supercellDisclaimer: 'This content is not affiliated with, endorsed, sponsored, or specifically approved by Supercell and Supercell is not responsible for it. For more information see Supercell\'s Fan Content Policy.',
       supercellPolicyUrl: 'https://www.supercell.com/fan-content-policy'
     },
     faq: {
