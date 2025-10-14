@@ -9,7 +9,7 @@ interface Card {
   iconUrls: {
     medium: string;
   };
-  elixirCost: number;
+  elixirCost?: number;
 }
 
 interface TrainingSimulatorProps {
@@ -68,7 +68,7 @@ export function TrainingSimulator({ cards, settings, onExit }: TrainingSimulator
       for (let i = 0; i < settings.cardCount; i++) {
         const randomCard = cards[Math.floor(Math.random() * cards.length)];
         selectedCards.push(randomCard);
-        totalCost += randomCard.elixirCost;
+        totalCost += randomCard.elixirCost || 0;
       }
       attempts++;
     } while (totalCost > 10 && attempts < 100);
@@ -100,7 +100,7 @@ export function TrainingSimulator({ cards, settings, onExit }: TrainingSimulator
   const handleGuess = (guess: number) => {
     if (gameState.showFeedback || gameState.gameEnded) return;
 
-    const totalCost = gameState.currentCards.reduce((sum, card) => sum + card.elixirCost, 0);
+    const totalCost = gameState.currentCards.reduce((sum, card) => sum + (card.elixirCost || 0), 0);
     const correctAnswer = gameState.currentElixir - totalCost;
     const isCorrect = guess === correctAnswer;
 
@@ -151,7 +151,7 @@ export function TrainingSimulator({ cards, settings, onExit }: TrainingSimulator
       setGameState(prev => {
         if (prev.timeLeft <= 1) {
           // Time's up - treat as incorrect answer
-          const totalCost = prev.currentCards.reduce((sum, card) => sum + card.elixirCost, 0);
+          const totalCost = prev.currentCards.reduce((sum, card) => sum + (card.elixirCost || 0), 0);
           const correctAnswer = prev.currentElixir - totalCost;
           
           return {
@@ -368,7 +368,7 @@ export function TrainingSimulator({ cards, settings, onExit }: TrainingSimulator
                     {language === 'pt-BR' ? card.name : (card as any).nameEn || card.name}
                   </div>
                   {gameState.showFeedback && (
-                    <div className="text-game-orange font-bold mt-1">{card.elixirCost}</div>
+                    <div className="text-game-orange font-bold mt-1">{card.elixirCost ?? ''}</div>
                   )}
                 </div>
               ))}

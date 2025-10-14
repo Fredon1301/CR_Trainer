@@ -8,7 +8,19 @@ import { Crown, Target, Play, Settings } from 'lucide-react';
 import { GridTrainingMode } from '@/components/GridTrainingMode';
 import cardsData from '@/data/cards.json';
 
-type CardType = typeof cardsData.items[0];
+type CardType = {
+  name: string;
+  nameEn: string;
+  id: number;
+  maxLevel: number;
+  maxEvolutionLevel?: number;
+  elixirCost?: number;
+  iconUrls: {
+    medium: string;
+    evolutionMedium?: string;
+  };
+  rarity: string;
+};
 
 export default function Training() {
   const { t } = useLanguage();
