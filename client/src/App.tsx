@@ -21,7 +21,6 @@ function Router() {
   return (
     <Switch>
       
-        <SpeedInsights />
       <Route path="/" component={Landing} />
       <Route path="/home" component={Home} />
       <Route path="/cards" component={Cards} />
