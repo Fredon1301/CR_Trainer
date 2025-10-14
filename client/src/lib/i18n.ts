@@ -10,11 +10,24 @@ export const translations = {
       register: 'Registrar',
       logout: 'Sair'
     },
-    hero: {
-      title: 'Domine o Clash Royale',
-      subtitle: 'Treine suas habilidades, memorize custos de elixir e acompanhe dados de clãs em tempo real.',
+    home: {
+      description: 'Domine o Clash Royale através do treinamento estratégico. Aprenda a identificar custos de elixir instantaneamente e tome decisões melhores em batalha.'
+    },
+    landing: {
+      heroTitle: 'Domine o Clash Royale',
+      heroSubtitle: 'Treine suas habilidades, memorize custos de elixir e acompanhe dados de clãs em tempo real.',
       startTraining: 'Começar Treinamento',
-      exploreCards: 'Explorar Cartas'
+      exploreCards: 'Explorar Cartas',
+      viewFeature: 'Ver {feature}',
+      access: 'Acessar',
+      footerDescription: 'A melhor plataforma para treinar suas habilidades no Clash Royale e acompanhar dados em tempo real.',
+      training: 'Treinamento',
+      apiFeatures: 'Recursos API',
+      support: 'Suporte',
+      faq: 'FAQ',
+      contact: 'Contato',
+      documentation: 'Documentação',
+      rightsReserved: '© 2024 CR Trainer. Todos os direitos reservados.'
     },
     training: {
       title: 'Modos de Treinamento',
@@ -22,13 +35,56 @@ export const translations = {
       gridMode: {
         title: 'Memorização de Elixir',
         description: 'Grade com todas as cartas do seu banco de dados. Visualize cartas e teste seu conhecimento sobre custos de elixir.',
-        start: 'Começar Grade de Memorização'
+        start: 'Começar Grade de Memorização',
+        feature1: 'Grade interativa de cartas',
+        feature2: 'Pop-ups com detalhes das cartas',
+        feature3: 'Teste de conhecimento',
+        backToModes: 'Voltar aos Modos',
+        noCards: 'Nenhuma carta disponível',
+        noCardsDescription: 'Adicione algumas cartas no painel administrativo para começar o treinamento.',
+        startTraining: 'Iniciar Treinamento',
+        hideCosts: 'Esconder Custos',
+        showCosts: 'Mostrar Custos',
+        reset: 'Reiniciar',
+        instructions: 'Instruções: Clique nas cartas para revelar seus custos de elixir. Tente memorizar antes de revelar tudo!',
+        revealedCards: 'Cartas reveladas'
       },
       simulationMode: {
         title: 'Simulação Aleatória',
         description: 'Cartas aleatórias aparecem e você deve adivinhar o custo de elixir. Perfeito para treinar rapidez de reação.',
-        start: 'Começar Simulação'
-      }
+        start: 'Começar Simulação',
+        feature1: 'Cartas aleatórias',
+        feature2: 'Cronômetro de reação',
+        feature3: 'Sistema de pontuação',
+        errorGeneratingCards: 'Não foi possível gerar cartas para esta rodada.',
+        correctGuess: 'Correto! +{points} pontos',
+        incorrectGuess: 'Incorreto! A resposta era {answer} elixir.', // Adicionado
+        tipTitle: 'Dica',
+        tipDescription: 'Considere praticar mais no modo de memorização para melhorar!',
+        timesUp: 'Tempo esgotado! A resposta era {answer} elixir.',
+        endGameCongrats: 'Parabéns!',
+        endGameScore: 'Sua mente está afiada! Pontuação: {score}',
+        readyTitle: 'Pronto para começar?',
+        readyDescription: 'Cartas aparecerão e você terá {time} segundos para calcular quanto elixir sobra.',
+        finalResult: 'Resultado Final',
+        sessionOver: 'Sessão Finalizada!',
+        totalScore: 'Pontos Totais',
+        correct: 'Acertos',
+        total: 'Total de Rodadas',
+        playAgain: 'Jogar Novamente',
+        backToMenu: 'Voltar ao Menu',
+        opponentElixir: 'Elixir do Adversário',
+        cardsPlayed: 'Cartas jogadas',
+        question: 'Quanto elixir sobra?',
+        score: 'Pontos',
+        seconds: 'Segundos',
+        stop: 'Parar',
+        nextRound: 'Próxima Rodada',
+        nextRoundIn: 'Próxima rodada em'
+      },      
+      loginMessage: 'Você precisa estar logado para acessar os modos de treinamento.',
+      helpTitle: 'Como isso vai te ajudar?',
+      helpDescription: 'O Clash Royale é um jogo de estratégia que exige raciocínio rápido. Ao memorizar e saber instantaneamente a quantidade de elixir das cartas que seu inimigo jogar, você conseguirá identificar quando ele está em desvantagem de elixir e poderá punir suas jogadas com contra-ataques efetivos. Este treinamento desenvolve sua capacidade de cálculo rápido e tomada de decisões estratégicas em tempo real.'
     },
     features: {
       title: 'Recursos Avançados',
@@ -36,6 +92,14 @@ export const translations = {
       clanWars: 'Guerras de Clãs',
       playerStats: 'Estatísticas de Jogador',
       tournaments: 'Torneios'
+    },
+    homeFeatures: {
+      cardMemorization: 'Memorização de Cartas',
+      cardMemorizationDescription: 'Aprenda os custos de elixir de todas as cartas do Clash Royale de forma interativa.',
+      reactionTraining: 'Treino de Reação',
+      reactionTrainingDescription: 'Desenvolva sua velocidade de reconhecimento e tomada de decisões rápidas.',
+      advancedStrategy: 'Estratégia Avançada',
+      advancedStrategyDescription: 'Melhore suas habilidades estratégicas para dominar as batalhas do Clash Royale.'
     },
     clans: {
       title: 'Clãs',
@@ -52,14 +116,39 @@ export const translations = {
       viewAll: 'Ver Todas as Cartas',
       elixirCost: 'Custo de Elixir',
       showCost: 'Ver Elixir',
-      shuffle: 'Embaralhar'
+      shuffle: 'Embaralhar',
+      searchPlaceholder: 'Buscar cartas...',
+      noCardsFound: 'Nenhuma carta encontrada',
+      noCardsFoundDescription: 'Tente ajustar sua busca.',
+      noCardsAvailable: 'Não há cartas disponíveis no momento.',
+      errorLoading: 'Erro ao carregar cartas',
+      errorLoadingDescription: 'Não foi possível carregar as cartas. Tente novamente mais tarde.'
     },
     admin: {
       title: 'Painel Administrativo',
       subtitle: 'Gerencie cartas, usuários e configurações do sistema',
       manageCards: 'Gerenciar Cartas',
       manageUsers: 'Gerenciar Usuários',
-      settings: 'Configurações'
+      settings: 'Configurações',
+      accessDenied: 'Acesso Negado',
+      permissionRequired: 'Você precisa de permissões de administrador para acessar esta página.',
+      cardCreated: 'Carta criada com sucesso!',
+      errorCreatingCard: 'Erro ao criar carta',
+      cardUpdated: 'Carta atualizada com sucesso!',
+      errorUpdatingCard: 'Erro ao atualizar carta',
+      cardRemoved: 'Carta removida com sucesso!',
+      errorRemovingCard: 'Erro ao remover carta',
+      confirmDelete: 'Tem certeza que deseja remover esta carta?',
+      manageCardsDescription: 'Gerencie as cartas do banco de dados',
+      totalCards: 'Total de cartas: {count}',
+      addCard: 'Adicionar Carta',
+      manageUsersDescription: 'Controle de usuários e permissões',
+      comingSoon: 'Em Breve',
+      settingsDescription: 'Configurações do sistema',
+      loadingCards: 'Carregando cartas...',
+      noCardsFoundAdmin: 'Nenhuma carta encontrada. Adicione a primeira carta!',
+      editCard: 'Editar Carta',
+      addNewCard: 'Adicionar Nova Carta'
     },
     common: {
       close: 'Fechar',
@@ -73,6 +162,20 @@ export const translations = {
       success: 'Sucesso',
       backToHome: 'Voltar para o Início',
       loginRequired: 'Login Necessário',
+      exit: 'Sair',
+      unauthorized: 'Não autorizado',
+      relogin: 'Você foi desconectado. Faça o login novamente...',
+      elixir: 'elixir',
+      namePt: 'Nome (PT-BR)',
+      nameEn: 'Nome (EN-US)',
+      elixirCost: 'Custo de Elixir',
+      rarity: 'Raridade',
+      type: 'Tipo',
+      imageUrl: 'URL da Imagem',
+      hitpoints: 'Vida (opcional)',
+      damage: 'Dano (opcional)',
+      descriptionPt: 'Descrição (PT-BR)',
+      descriptionEn: 'Descrição (EN-US)',
       loginToContinue: 'Entrar para Continuar',
       supercellDisclaimer: 'Este conteúdo não é afiliado, endossado, patrocinado ou especificamente aprovado pela Supercell e a Supercell não é responsável por ele. Para mais informações, consulte a Política de Conteúdo de Fã da Supercell.',
       supercellPolicyUrl: 'https://www.supercell.com/fan-content-policy'
@@ -95,6 +198,10 @@ export const translations = {
     documentation: {
       title: 'Documentação',
       pageContent: 'Conteúdo da página de Documentação aqui.'
+    },
+    about: {
+      title: 'Sobre o CR Trainer',
+      description: 'O Clash Royale é um jogo que exige não apenas habilidade manual, mas também conhecimento estratégico profundo. Saber o custo de elixir de cada carta instantaneamente pode ser a diferença entre vitória e derrota. Nosso treinador foi desenvolvido para ajudar jogadores de todos os níveis a dominarem esse aspecto crucial do jogo, através de exercícios interativos e desafiadores que simulam situações reais de batalha.'
     }
   },
   'en-US': {
@@ -108,11 +215,24 @@ export const translations = {
       register: 'Register',
       logout: 'Logout'
     },
-    hero: {
-      title: 'Master Clash Royale',
-      subtitle: 'Train your skills, memorize elixir costs and track clan data in real time.',
+    home: {
+      description: 'Master Clash Royale through strategic training. Learn to instantly identify elixir costs and make better battle decisions.'
+    },
+    landing: {
+      heroTitle: 'Master Clash Royale',
+      heroSubtitle: 'Train your skills, memorize elixir costs, and track real-time clan data.',
       startTraining: 'Start Training',
-      exploreCards: 'Explore Cards'
+      exploreCards: 'Explore Cards',
+      viewFeature: 'View {feature}',
+      access: 'Access',
+      footerDescription: 'The best platform to train your Clash Royale skills and track real-time data.',
+      training: 'Training',
+      apiFeatures: 'API Features',
+      support: 'Support',
+      faq: 'FAQ',
+      contact: 'Contact',
+      documentation: 'Documentation',
+      rightsReserved: '© 2024 CR Trainer. All rights reserved.'
     },
     training: {
       title: 'Training Modes',
@@ -120,13 +240,56 @@ export const translations = {
       gridMode: {
         title: 'Elixir Memorization',
         description: 'Grid with all cards from your database. View cards and test your knowledge of elixir costs.',
-        start: 'Start Memorization Grid'
+        start: 'Start Memorization Grid',
+        feature1: 'Interactive card grid',
+        feature2: 'Card detail pop-ups',
+        feature3: 'Knowledge test',
+        backToModes: 'Back to Modes',
+        noCards: 'No cards available',
+        noCardsDescription: 'Add some cards in the admin panel to start training.',
+        startTraining: 'Start Training',
+        hideCosts: 'Hide Costs',
+        showCosts: 'Show Costs',
+        reset: 'Reset',
+        instructions: 'Instructions: Click on the cards to reveal their elixir costs. Try to memorize before revealing everything!',
+        revealedCards: 'Revealed cards'
       },
       simulationMode: {
         title: 'Random Simulation',
         description: 'Random cards appear and you must guess the elixir cost. Perfect for training reaction speed.',
-        start: 'Start Simulation'
-      }
+        start: 'Start Simulation',
+        feature1: 'Random cards',
+        feature2: 'Reaction timer',
+        feature3: 'Scoring system',
+        errorGeneratingCards: 'Could not generate cards for this round.',
+        correctGuess: 'Correct! +{points} points',
+        incorrectGuess: 'Incorrect! The answer was {answer} elixir.',
+        tipTitle: 'Tip',
+        tipDescription: 'Consider practicing more in the memorization mode to improve!',
+        timesUp: 'Time\'s up! The answer was {answer} elixir.',
+        endGameCongrats: 'Congratulations!',
+        endGameScore: 'Your mind is sharp! Score: {score}',
+        readyTitle: 'Ready to start?',
+        readyDescription: 'Cards will appear, and you will have {time} seconds to calculate how much elixir is left.',
+        finalResult: 'Final Result',
+        sessionOver: 'Session Over!',
+        totalScore: 'Total Score',
+        correct: 'Correct',
+        total: 'Total Rounds',
+        playAgain: 'Play Again',
+        backToMenu: 'Back to Menu',
+        opponentElixir: 'Opponent\'s Elixir',
+        cardsPlayed: 'Cards played',
+        question: 'How much elixir is left?',
+        score: 'Score',
+        seconds: 'Seconds',
+        stop: 'Stop',
+        nextRound: 'Next Round',
+        nextRoundIn: 'Next round in'
+      },      
+      loginMessage: 'You need to be logged in to access training modes.',
+      helpTitle: 'How will this help you?',
+      helpDescription: 'Clash Royale is a strategy game that requires quick thinking. By memorizing and instantly knowing the elixir cost of the cards your enemy plays, you can identify when they are at an elixir disadvantage and punish their plays with effective counter-attacks. This training develops your ability for quick calculation and strategic decision-making in real time.'
     },
     features: {
       title: 'Advanced Features',
@@ -134,6 +297,14 @@ export const translations = {
       clanWars: 'Clan Wars',
       playerStats: 'Player Statistics',
       tournaments: 'Tournaments'
+    },
+    homeFeatures: {
+      cardMemorization: 'Card Memorization',
+      cardMemorizationDescription: 'Learn the elixir costs of all Clash Royale cards interactively.',
+      reactionTraining: 'Reaction Training',
+      reactionTrainingDescription: 'Develop your recognition speed and quick decision-making.',
+      advancedStrategy: 'Advanced Strategy',
+      advancedStrategyDescription: 'Improve your strategic skills to dominate Clash Royale battles.'
     },
     clans: {
       title: 'Clans',
@@ -150,14 +321,39 @@ export const translations = {
       viewAll: 'View All Cards',
       elixirCost: 'Elixir Cost',
       showCost: 'Show Elixir',
-      shuffle: 'Shuffle'
+      shuffle: 'Shuffle',
+      searchPlaceholder: 'Search cards...',
+      noCardsFound: 'No cards found',
+      noCardsFoundDescription: 'Try adjusting your search.',
+      noCardsAvailable: 'No cards available at the moment.',
+      errorLoading: 'Error loading cards',
+      errorLoadingDescription: 'Could not load cards. Please try again later.'
     },
     admin: {
       title: 'Admin Panel',
       subtitle: 'Manage cards, users and system settings',
       manageCards: 'Manage Cards',
       manageUsers: 'Manage Users',
-      settings: 'Settings'
+      settings: 'Settings',
+      accessDenied: 'Access Denied',
+      permissionRequired: 'You need administrator permissions to access this page.',
+      cardCreated: 'Card created successfully!',
+      errorCreatingCard: 'Error creating card',
+      cardUpdated: 'Card updated successfully!',
+      errorUpdatingCard: 'Error updating card',
+      cardRemoved: 'Card removed successfully!',
+      errorRemovingCard: 'Error removing card',
+      confirmDelete: 'Are you sure you want to remove this card?',
+      manageCardsDescription: 'Manage the cards in the database',
+      totalCards: 'Total cards: {count}',
+      addCard: 'Add Card',
+      manageUsersDescription: 'Control users and permissions',
+      comingSoon: 'Coming Soon',
+      settingsDescription: 'System settings',
+      loadingCards: 'Loading cards...',
+      noCardsFoundAdmin: 'No cards found. Add the first card!',
+      editCard: 'Edit Card',
+      addNewCard: 'Add New Card'
     },
     common: {
       close: 'Close',
@@ -171,6 +367,20 @@ export const translations = {
       success: 'Success',
       backToHome: 'Back to Home',
       loginRequired: 'Login Required',
+      exit: 'Exit',
+      unauthorized: 'Unauthorized',
+      relogin: 'You are logged out. Logging in again...',
+      elixir: 'elixir',
+      namePt: 'Name (PT-BR)',
+      nameEn: 'Name (EN-US)',
+      elixirCost: 'Elixir Cost',
+      rarity: 'Rarity',
+      type: 'Type',
+      imageUrl: 'Image URL',
+      hitpoints: 'Hitpoints (optional)',
+      damage: 'Damage (optional)',
+      descriptionPt: 'Description (PT-BR)',
+      descriptionEn: 'Description (EN-US)',
       loginToContinue: 'Login to Continue',
       supercellDisclaimer: 'This content is not affiliated with, endorsed, sponsored, or specifically approved by Supercell and Supercell is not responsible for it. For more information see Supercell’s Fan Content Policy.',
       supercellPolicyUrl: 'https://www.supercell.com/fan-content-policy'
@@ -193,6 +403,10 @@ export const translations = {
     documentation: {
       title: 'Documentation',
       pageContent: 'Documentation page content here.'
+    },
+    about: {
+      title: 'About CR Trainer',
+      description: 'Clash Royale is a game that demands not only manual skill but also deep strategic knowledge. Instantly knowing the elixir cost of each card can be the difference between victory and defeat. Our trainer was developed to help players of all levels master this crucial aspect of the game through interactive and challenging exercises that simulate real battle situations.'
     }
   }
 };

@@ -6,7 +6,7 @@ type Language = 'pt-BR' | 'en-US';
 interface LanguageContextType {
   language: Language;
   setLanguage: (lang: Language) => void;
-  t: (key: string) => string;
+  t: (key: string, replacements?: { [key: string]: string | number }) => string;
 }
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
@@ -21,15 +21,21 @@ export function LanguageProvider({ children }: { children: React.ReactNode }): J
     localStorage.setItem('cr-trainer-language', language);
   }, [language]);
 
-  const t = (key: string): string => {
+  const t = (key: string, replacements?: { [key: string]: string | number }): string => {
     const keys = key.split('.');
     let value: any = translations[language];
     
     for (const k of keys) {
       value = value?.[k];
     }
-    
-    return value || key;
+
+    let str = String(value || key);
+    if (replacements) {
+      Object.keys(replacements).forEach(rKey => {
+        str = str.replace(new RegExp(`\\{${rKey}\\}`, 'g'), String(replacements[rKey]));
+      });
+    }
+    return str;
   };
 
   return React.createElement(

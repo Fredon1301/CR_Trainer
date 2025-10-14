@@ -46,8 +46,8 @@ export default function Admin() {
         <Header />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="text-center">
-            <h1 className="text-2xl font-bold text-white mb-4">Acesso Negado</h1>
-            <p className="text-game-text">Você precisa de permissões de administrador para acessar esta página.</p>
+            <h1 className="text-2xl font-bold text-white mb-4">{t('admin.accessDenied')}</h1>
+            <p className="text-game-text">{t('admin.permissionRequired')}</p>
           </div>
         </div>
       </div>
@@ -79,14 +79,14 @@ export default function Admin() {
       });
       toast({
         title: t('common.success'),
-        description: 'Carta criada com sucesso!',
+        description: t('admin.cardCreated'),
       });
     },
     onError: (error) => {
       if (isUnauthorizedError(error)) {
         toast({
-          title: "Unauthorized",
-          description: "You are logged out. Logging in again...",
+          title: t('common.unauthorized'),
+          description: t('common.relogin'),
           variant: "destructive",
         });
         setTimeout(() => {
@@ -96,7 +96,7 @@ export default function Admin() {
       }
       toast({
         title: t('common.error'),
-        description: 'Erro ao criar carta',
+        description: t('admin.errorCreatingCard'),
         variant: 'destructive',
       });
     },
@@ -112,14 +112,14 @@ export default function Admin() {
       setEditingCard(null);
       toast({
         title: t('common.success'),
-        description: 'Carta atualizada com sucesso!',
+        description: t('admin.cardUpdated'),
       });
     },
     onError: (error) => {
       if (isUnauthorizedError(error)) {
         toast({
-          title: "Unauthorized",
-          description: "You are logged out. Logging in again...",
+          title: t('common.unauthorized'),
+          description: t('common.relogin'),
           variant: "destructive",
         });
         setTimeout(() => {
@@ -129,7 +129,7 @@ export default function Admin() {
       }
       toast({
         title: t('common.error'),
-        description: 'Erro ao atualizar carta',
+        description: t('admin.errorUpdatingCard'),
         variant: 'destructive',
       });
     },
@@ -143,14 +143,14 @@ export default function Admin() {
       queryClient.invalidateQueries({ queryKey: ['/api/cards'] });
       toast({
         title: t('common.success'),
-        description: 'Carta removida com sucesso!',
+        description: t('admin.cardRemoved'),
       });
     },
     onError: (error) => {
       if (isUnauthorizedError(error)) {
         toast({
-          title: "Unauthorized",
-          description: "You are logged out. Logging in again...",
+          title: t('common.unauthorized'),
+          description: t('common.relogin'),
           variant: "destructive",
         });
         setTimeout(() => {
@@ -160,7 +160,7 @@ export default function Admin() {
       }
       toast({
         title: t('common.error'),
-        description: 'Erro ao remover carta',
+        description: t('admin.errorRemovingCard'),
         variant: 'destructive',
       });
     },
@@ -193,7 +193,7 @@ export default function Admin() {
   };
 
   const handleDeleteCard = (cardId: string) => {
-    if (confirm('Tem certeza que deseja remover esta carta?')) {
+    if (confirm(t('admin.confirmDelete'))) {
       deleteCardMutation.mutate(cardId);
     }
   };
@@ -236,15 +236,15 @@ export default function Admin() {
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-game-text mb-4">Gerencie as cartas do banco de dados</p>
-              <p className="text-sm text-game-text mb-4">Total de cartas: {cards.length}</p>
+              <p className="text-game-text mb-4">{t('admin.manageCardsDescription')}</p>
+              <p className="text-sm text-game-text mb-4">{t('admin.totalCards', { count: cards.length })}</p>
               <Button
                 onClick={openCreateModal}
                 className="w-full bg-game-orange hover:bg-game-orange/90"
                 data-testid="button-add-card"
               >
                 <Plus className="mr-2 h-4 w-4" />
-                Adicionar Carta
+                {t('admin.addCard')}
               </Button>
             </CardContent>
           </Card>
@@ -257,9 +257,9 @@ export default function Admin() {
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-game-text mb-4">Controle de usuários e permissões</p>
+              <p className="text-game-text mb-4">{t('admin.manageUsersDescription')}</p>
               <Button variant="outline" className="w-full" disabled>
-                Em Breve
+                {t('admin.comingSoon')}
               </Button>
             </CardContent>
           </Card>
@@ -272,9 +272,9 @@ export default function Admin() {
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-game-text mb-4">Configurações do sistema</p>
+              <p className="text-game-text mb-4">{t('admin.settingsDescription')}</p>
               <Button variant="outline" className="w-full" disabled>
-                Em Breve
+                {t('admin.comingSoon')}
               </Button>
             </CardContent>
           </Card>
@@ -283,11 +283,11 @@ export default function Admin() {
         {/* Cards Management */}
         <Card className="bg-game-card border-game-muted">
           <CardHeader>
-            <CardTitle className="text-white">Gerenciar Cartas</CardTitle>
+            <CardTitle className="text-white">{t('admin.manageCards')}</CardTitle>
           </CardHeader>
           <CardContent>
             {isLoading ? (
-              <p className="text-game-text">Carregando cartas...</p>
+              <p className="text-game-text">{t('admin.loadingCards')}</p>
             ) : (
               <div className="grid gap-4">
                 {cards.map((card) => (
@@ -306,7 +306,7 @@ export default function Admin() {
                       <div>
                         <h4 className="font-semibold text-white">{card.name}</h4>
                         <p className="text-sm text-game-text">
-                          {card.elixirCost} elixir • {card.rarity} • {card.type}
+                          {card.elixirCost} {t('common.elixir')} • {card.rarity} • {card.type}
                         </p>
                       </div>
                     </div>
@@ -332,7 +332,7 @@ export default function Admin() {
                 ))}
                 {cards.length === 0 && (
                   <p className="text-center text-game-text py-8">
-                    Nenhuma carta encontrada. Adicione a primeira carta!
+                    {t('admin.noCardsFoundAdmin')}
                   </p>
                 )}
               </div>
@@ -346,13 +346,13 @@ export default function Admin() {
         <DialogContent className="bg-game-card border-game-muted max-w-2xl">
           <DialogHeader>
             <DialogTitle className="text-white">
-              {editingCard ? 'Editar Carta' : 'Adicionar Nova Carta'}
+              {editingCard ? t('admin.editCard') : t('admin.addNewCard')}
             </DialogTitle>
           </DialogHeader>
 
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <Label htmlFor="name" className="text-game-text">Nome (PT-BR)</Label>
+              <Label htmlFor="name" className="text-game-text">{t('common.namePt')}</Label>
               <Input
                 id="name"
                 value={cardForm.name}
@@ -363,7 +363,7 @@ export default function Admin() {
             </div>
 
             <div>
-              <Label htmlFor="nameEn" className="text-game-text">Nome (EN-US)</Label>
+              <Label htmlFor="nameEn" className="text-game-text">{t('common.nameEn')}</Label>
               <Input
                 id="nameEn"
                 value={cardForm.nameEn}
@@ -374,7 +374,7 @@ export default function Admin() {
             </div>
 
             <div>
-              <Label htmlFor="elixirCost" className="text-game-text">Custo de Elixir</Label>
+              <Label htmlFor="elixirCost" className="text-game-text">{t('common.elixirCost')}</Label>
               <Input
                 id="elixirCost"
                 type="number"
@@ -388,7 +388,7 @@ export default function Admin() {
             </div>
 
             <div>
-              <Label htmlFor="rarity" className="text-game-text">Raridade</Label>
+              <Label htmlFor="rarity" className="text-game-text">{t('common.rarity')}</Label>
               <Select value={cardForm.rarity} onValueChange={(value) => setCardForm({ ...cardForm, rarity: value })}>
                 <SelectTrigger className="bg-game-muted border-game-muted text-white" data-testid="select-card-rarity">
                   <SelectValue />
@@ -403,7 +403,7 @@ export default function Admin() {
             </div>
 
             <div>
-              <Label htmlFor="type" className="text-game-text">Tipo</Label>
+              <Label htmlFor="type" className="text-game-text">{t('common.type')}</Label>
               <Select value={cardForm.type} onValueChange={(value) => setCardForm({ ...cardForm, type: value })}>
                 <SelectTrigger className="bg-game-muted border-game-muted text-white" data-testid="select-card-type">
                   <SelectValue />
@@ -417,7 +417,7 @@ export default function Admin() {
             </div>
 
             <div>
-              <Label htmlFor="imageUrl" className="text-game-text">URL da Imagem</Label>
+              <Label htmlFor="imageUrl" className="text-game-text">{t('common.imageUrl')}</Label>
               <Input
                 id="imageUrl"
                 value={cardForm.imageUrl || ''}
@@ -428,7 +428,7 @@ export default function Admin() {
             </div>
 
             <div>
-              <Label htmlFor="hitpoints" className="text-game-text">Vida (opcional)</Label>
+              <Label htmlFor="hitpoints" className="text-game-text">{t('common.hitpoints')}</Label>
               <Input
                 id="hitpoints"
                 type="number"
@@ -440,7 +440,7 @@ export default function Admin() {
             </div>
 
             <div>
-              <Label htmlFor="damage" className="text-game-text">Dano (opcional)</Label>
+              <Label htmlFor="damage" className="text-game-text">{t('common.damage')}</Label>
               <Input
                 id="damage"
                 type="number"
@@ -452,7 +452,7 @@ export default function Admin() {
             </div>
 
             <div className="col-span-2">
-              <Label htmlFor="description" className="text-game-text">Descrição (PT-BR)</Label>
+              <Label htmlFor="description" className="text-game-text">{t('common.descriptionPt')}</Label>
               <Textarea
                 id="description"
                 value={cardForm.description || ''}
@@ -463,7 +463,7 @@ export default function Admin() {
             </div>
 
             <div className="col-span-2">
-              <Label htmlFor="descriptionEn" className="text-game-text">Descrição (EN-US)</Label>
+              <Label htmlFor="descriptionEn" className="text-game-text">{t('common.descriptionEn')}</Label>
               <Textarea
                 id="descriptionEn"
                 value={cardForm.descriptionEn || ''}

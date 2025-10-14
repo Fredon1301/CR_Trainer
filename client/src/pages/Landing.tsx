@@ -21,41 +21,20 @@ export default function Landing() {
   const features = [
     {
       icon: Shield,
-      title: t('features.clanWars'),
+      titleKey: 'features.clanWars',
       description: 'Acompanhe histórico de guerras, estatísticas atuais e logs detalhados do seu clã.',
       color: 'purple'
     },
     {
       icon: Users,
-      title: t('features.playerStats'),
+      titleKey: 'features.playerStats',
       description: 'Consulte perfis de jogadores, troféus, decks favoritos e histórico de batalhas.',
       color: 'blue'
     },
     {
       icon: Trophy,
-      title: t('features.tournaments'),
+      titleKey: 'features.tournaments',
       description: 'Encontre torneios ativos, rankings globais e informações de competições.',
-      color: 'green'
-    }
-  ];
-
-  const adminFeatures = [
-    {
-      icon: Crown,
-      title: t('admin.manageCards'),
-      description: 'Adicione, edite ou remova cartas do banco de dados',
-      color: 'orange'
-    },
-    {
-      icon: Users,
-      title: t('admin.manageUsers'),
-      description: 'Controle permissões e acesso de usuários',
-      color: 'blue'
-    },
-    {
-      icon: Cog,
-      title: t('admin.settings'),
-      description: 'Ajuste configurações gerais do sistema',
       color: 'green'
     }
   ];
@@ -70,15 +49,12 @@ export default function Landing() {
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="space-y-8">
             <div className="space-y-4">
-              <h1 className="text-4xl lg:text-6xl font-bold text-white leading-tight">
-                {t('hero.title').split(' ').map((word, index) => (
-                  <span key={index} className={word === 'Clash' || word === 'Royale' ? 'text-game-orange' : ''}>
-                    {word}{' '}
-                  </span>
-                ))}
+              <h1 className="text-4xl lg:text-6xl font-bold text-white leading-tight" dangerouslySetInnerHTML={{
+                __html: t('landing.heroTitle').replace('Clash Royale', '<span class="text-game-orange">Clash Royale</span>')
+              }}>
               </h1>
               <p className="text-xl lg:text-2xl text-game-text max-w-3xl mx-auto">
-                {t('hero.subtitle')}
+                {t('landing.heroSubtitle')}
               </p>
             </div>
 
@@ -89,7 +65,7 @@ export default function Landing() {
                 data-testid="button-start-training"
               >
                 <Play className="mr-2" />
-                {t('hero.startTraining')}
+                {t('landing.startTraining')}
               </Button>
               <Button
                 onClick={handleExploreCards}
@@ -98,7 +74,7 @@ export default function Landing() {
                 data-testid="button-explore-cards"
               >
                 <Crown className="mr-2" />
-                {t('hero.exploreCards')}
+                {t('landing.exploreCards')}
               </Button>
             </div>
           </div>
@@ -155,35 +131,6 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* Features Overview */}
-      <section className="py-20 bg-game-dark">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">{t('features.title')}</h2>
-            <p className="text-xl text-game-text">{t('features.subtitle')}</p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {features.map((feature, index) => (
-              <div key={index} className="bg-game-card rounded-2xl p-6 border border-game-muted text-center space-y-4">
-                <div className={`w-16 h-16 bg-${feature.color}-500 bg-opacity-20 rounded-xl flex items-center justify-center mx-auto`}>
-                  <feature.icon className={`text-2xl text-${feature.color}-400`} />
-                </div>
-                <h3 className="text-xl font-bold text-white">{feature.title}</h3>
-                <p className="text-game-text">{feature.description}</p>
-                <Button
-                  onClick={handleStartTraining}
-                  className={`w-full py-3 bg-${feature.color}-500 text-white rounded-lg hover:bg-${feature.color}-600 transition-colors`}
-                  data-testid={`button-feature-${index}`}
-                >
-                  Ver {feature.title}
-                </Button>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       
 
       {/* Footer */}
@@ -196,40 +143,40 @@ export default function Landing() {
                 <h3 className="text-lg font-bold text-white">CR Trainer</h3>
               </div>
               <p className="text-game-text text-sm">
-                A melhor plataforma para treinar suas habilidades no Clash Royale e acompanhar dados em tempo real.
+                {t('landing.footerDescription')}
               </p>
             </div>
 
             <div>
-              <h4 className="text-white font-semibold mb-4">Treinamento</h4>
+              <h4 className="text-white font-semibold mb-4">{t('landing.training')}</h4>
               <ul className="space-y-2 text-sm text-game-text">
-                <li><a href="#" className="hover:text-game-orange transition-colors">Memorização de Elixir</a></li>
-                <li><a href="#" className="hover:text-game-orange transition-colors">Simulação Aleatória</a></li>
-                <li><a href="#" className="hover:text-game-orange transition-colors">Banco de Cartas</a></li>
+                <li><a href="#" className="hover:text-game-orange transition-colors">{t('training.gridMode.title')}</a></li>
+                <li><a href="#" className="hover:text-game-orange transition-colors">{t('training.simulationMode.title')}</a></li>
+                <li><a href="#" className="hover:text-game-orange transition-colors">{t('cards.title')}</a></li>
               </ul>
             </div>
 
             <div>
-              <h4 className="text-white font-semibold mb-4">Recursos API</h4>
+              <h4 className="text-white font-semibold mb-4">{t('landing.apiFeatures')}</h4>
               <ul className="space-y-2 text-sm text-game-text">
-                <li><a href="#" className="hover:text-game-orange transition-colors">Guerras de Clãs</a></li>
-                <li><a href="#" className="hover:text-game-orange transition-colors">Estatísticas</a></li>
-                <li><a href="#" className="hover:text-game-orange transition-colors">Torneios</a></li>
+                <li><a href="#" className="hover:text-game-orange transition-colors">{t('features.clanWars')}</a></li>
+                <li><a href="#" className="hover:text-game-orange transition-colors">{t('features.playerStats')}</a></li>
+                <li><a href="#" className="hover:text-game-orange transition-colors">{t('features.tournaments')}</a></li>
               </ul>
             </div>
 
             <div>
-              <h4 className="text-white font-semibold mb-4">Suporte</h4>
+              <h4 className="text-white font-semibold mb-4">{t('landing.support')}</h4>
               <ul className="space-y-2 text-sm text-game-text">
-                <li><Link href="/faq" className="hover:text-game-orange transition-colors">FAQ</Link></li>
-                <li><Link href="/contact" className="hover:text-game-orange transition-colors">Contato</Link></li>
-                <li><Link href="/documentation" className="hover:text-game-orange transition-colors">Documentação</Link></li>
+                <li><Link href="/faq" className="hover:text-game-orange transition-colors">{t('landing.faq')}</Link></li>
+                <li><Link href="/contact" className="hover:text-game-orange transition-colors">{t('landing.contact')}</Link></li>
+                <li><Link href="/documentation" className="hover:text-game-orange transition-colors">{t('landing.documentation')}</Link></li>
               </ul>
             </div>
           </div>
 
           <div className="border-t border-game-muted mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
-            <p className="text-sm text-game-text">&copy; 2024 CR Trainer. Todos os direitos reservados.</p>
+            <p className="text-sm text-game-text">{t('landing.rightsReserved')}</p>
             <p className="text-sm text-game-text mt-2 md:mt-0">
               {t('common.supercellDisclaimer').split('Supercell’s Fan Content Policy.').map((part, index) => (
                 <span key={index}>

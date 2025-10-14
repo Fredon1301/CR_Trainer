@@ -110,7 +110,7 @@ export default function Contact() {
               className="bg-game-muted border-game-muted text-white"
             />
           </div>
-          <Button type="submit" className="w-full bg-game-orange hover:bg-game-orange/90" disabled={isLoading}>
+          <Button type="submit" className="w-full bg-game-orange hover:bg-game-orange/90 text-white" disabled={isLoading}>
             {isLoading ? t('contact.sending') : t('contact.send')}
           </Button>
         </form>

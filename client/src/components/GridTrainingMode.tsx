@@ -79,12 +79,12 @@ export function GridTrainingMode({ cards, onExit }: GridTrainingModeProps) {
               data-testid="button-back-to-training"
             >
               <ArrowLeft className="mr-2 h-4 w-4" />
-              Voltar aos Modos
+              {t('training.gridMode.backToModes')}
             </Button>
           </div>
           <div className="text-center py-12">
-            <h3 className="text-xl font-bold text-white mb-2">Nenhuma carta disponível</h3>
-            <p className="text-game-text">Adicione algumas cartas no painel administrativo para começar o treinamento.</p>
+            <h3 className="text-xl font-bold text-white mb-2">{t('training.gridMode.noCards')}</h3>
+            <p className="text-game-text">{t('training.gridMode.noCardsDescription')}</p>
           </div>
         </div>
       </div>
@@ -105,7 +105,7 @@ export function GridTrainingMode({ cards, onExit }: GridTrainingModeProps) {
             data-testid="button-back-to-training"
           >
             <ArrowLeft className="mr-2 h-4 w-4" />
-            Voltar aos Modos
+            {t('training.gridMode.backToModes')}
           </Button>
           
           <h1 className="text-3xl font-bold text-white mb-4">{t('training.gridMode.title')}</h1>
@@ -120,7 +120,7 @@ export function GridTrainingMode({ cards, onExit }: GridTrainingModeProps) {
                 data-testid="button-start-grid-training"
               >
                 <Target className="mr-2 h-4 w-4" />
-                Iniciar Treinamento
+                {t('training.gridMode.startTraining')}
               </Button>
             ) : (
               <>
@@ -133,12 +133,12 @@ export function GridTrainingMode({ cards, onExit }: GridTrainingModeProps) {
                   {showElixirCosts ? (
                     <>
                       <EyeOff className="mr-2 h-4 w-4" />
-                      Esconder Custos
+                      {t('training.gridMode.hideCosts')}
                     </>
                   ) : (
                     <>
                       <Eye className="mr-2 h-4 w-4" />
-                      Mostrar Custos
+                      {t('training.gridMode.showCosts')}
                     </>
                   )}
                 </Button>
@@ -149,7 +149,7 @@ export function GridTrainingMode({ cards, onExit }: GridTrainingModeProps) {
                   data-testid="button-reset-training"
                 >
                   <RotateCcw className="mr-2 h-4 w-4" />
-                  Reiniciar
+                  {t('training.gridMode.reset')}
                 </Button>
               </>
             )}
@@ -158,8 +158,7 @@ export function GridTrainingMode({ cards, onExit }: GridTrainingModeProps) {
           {gameStarted && (
             <div className="bg-game-card border-game-muted rounded-lg p-4 mb-6">
               <p className="text-game-text text-sm">
-                <strong>Instruções:</strong> Clique nas cartas para revelar seus custos de elixir. 
-                Tente memorizar antes de revelar tudo!
+                <strong>{t('training.gridMode.instructions').split(':')[0]}:</strong> {t('training.gridMode.instructions').split(':')[1]}
               </p>
             </div>
           )}
@@ -175,15 +174,15 @@ export function GridTrainingMode({ cards, onExit }: GridTrainingModeProps) {
               data-testid={`grid-card-${cardState.card.id}`}
             >
               <CardContent className="p-4">
-                {cardState.card.imageUrl && (
+                {cardState.card.iconUrls.medium && (
                   <img
-                    src={cardState.card.imageUrl}
-                    alt={language === 'pt-BR' ? cardState.card.name : cardState.card.nameEn}
+                    src={cardState.card.iconUrls.medium}
+                    alt={language === 'pt-BR' ? cardState.card.name : (cardState.card as any).nameEn || cardState.card.name}
                     className="w-full h-32 object-cover rounded-lg mb-3 group-hover:scale-105 transition-transform"
                   />
                 )}
                 <h4 className="text-white font-semibold text-center text-sm mb-3">
-                  {language === 'pt-BR' ? cardState.card.name : cardState.card.nameEn}
+                  {language === 'pt-BR' ? cardState.card.name : (cardState.card as any).nameEn || cardState.card.name}
                 </h4>
                 
                 {/* Elixir Cost Display */}
@@ -212,7 +211,7 @@ export function GridTrainingMode({ cards, onExit }: GridTrainingModeProps) {
           <div className="mt-8 text-center">
             <div className="bg-game-card border-game-muted rounded-lg p-4 inline-block">
               <p className="text-game-text">
-                Cartas reveladas: {cardStates.filter(state => state.isRevealed).length} / {cardStates.length}
+                {t('training.gridMode.revealedCards')}: {cardStates.filter(state => state.isRevealed).length} / {cardStates.length}
               </p>
             </div>
           </div>
@@ -225,14 +224,14 @@ export function GridTrainingMode({ cards, onExit }: GridTrainingModeProps) {
           <DialogContent className="bg-game-card border-game-muted max-w-md">
             <DialogHeader>
               <DialogTitle className="text-white text-center">
-                {language === 'pt-BR' ? selectedCard.name : selectedCard.nameEn}
+                {selectedCard.name}
               </DialogTitle>
             </DialogHeader>
             <div className="text-center py-4">
-              {selectedCard.imageUrl && (
+              {selectedCard.iconUrls.medium && (
                 <img
-                  src={selectedCard.imageUrl}
-                  alt={language === 'pt-BR' ? selectedCard.name : selectedCard.nameEn}
+                  src={selectedCard.iconUrls.medium}
+                  alt={selectedCard.name}
                   className="w-32 h-32 object-cover rounded-lg mx-auto mb-4"
                 />
               )}
@@ -242,11 +241,10 @@ export function GridTrainingMode({ cards, onExit }: GridTrainingModeProps) {
                 </span>
                 <Droplets className="text-purple-400 h-8 w-8" />
               </div>
-              {selectedCard.description && (
-                <p className="text-game-text text-sm">
-                  {language === 'pt-BR' ? selectedCard.description : selectedCard.descriptionEn}
-                </p>
-              )}
+              <div className="text-game-text">
+                <p>{t('common.rarity')}: {selectedCard.rarity}</p>
+                <p>Max Level: {selectedCard.maxLevel}</p> {/* "Max Level" is a game term, can be left as is or translated if needed */}
+              </div>
             </div>
           </DialogContent>
         </Dialog>

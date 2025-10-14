@@ -19,7 +19,7 @@ export default function Clans() {
             <p className="text-game-text mb-6">{t('clans.loginMessage')}</p>
             <Button
               onClick={() => setLocation('/login')}
-              className="bg-game-orange hover:bg-game-orange/90"
+              className="bg-game-orange hover:bg-game-orange/90 text-white"
               data-testid="button-login-clans"
             >
               {t('common.loginToContinue')}

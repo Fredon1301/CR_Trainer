@@ -1,9 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useLanguage } from '@/hooks/useLanguage';
 import { useToast } from '@/hooks/use-toast';
 import { Button } from '@/components/ui/button';
-import { apiRequest } from '@/lib/queryClient';
 import { ArrowLeft, Clock, Target, RotateCcw } from 'lucide-react';
 import type { Card } from '@shared/schema';
 
@@ -34,8 +32,6 @@ interface GameState {
 export function TrainingSimulator({ cards, settings, onExit }: TrainingSimulatorProps) {
   const { t, language } = useLanguage();
   const { toast } = useToast();
-  const queryClient = useQueryClient();
-
   const [gameState, setGameState] = useState<GameState>({
     currentCards: [],
     currentElixir: settings.elixirStart,
@@ -52,42 +48,33 @@ export function TrainingSimulator({ cards, settings, onExit }: TrainingSimulator
 
   const [countdownToNext, setCountdownToNext] = useState(0);
 
-  const saveSessionMutation = useMutation({
-    mutationFn: async (sessionData: any) => {
-      await apiRequest('POST', '/api/training-sessions', sessionData);
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['/api/training-sessions'] });
-    },
-  });
-
   const generateRandomCards = useCallback(() => {
     if (cards.length === 0) return [];
 
     let attempts = 0;
-    let selectedCards: Card[];
+    let selectedCards: Card[] = [];
+    let totalCost = 0;
 
     do {
       selectedCards = [];
+      totalCost = 0;
       for (let i = 0; i < settings.cardCount; i++) {
         const randomCard = cards[Math.floor(Math.random() * cards.length)];
         selectedCards.push(randomCard);
+        totalCost += randomCard.elixirCost;
       }
       attempts++;
-    } while (
-      selectedCards.reduce((sum, card) => sum + card.elixirCost, 0) > settings.elixirStart &&
-      attempts < 100
-    );
+    } while (totalCost > 10 && attempts < 100);
 
     return selectedCards;
-  }, [cards, settings]);
+  }, [cards, settings.cardCount]);
 
   const startNewRound = useCallback(() => {
     const newCards = generateRandomCards();
     if (newCards.length === 0) {
       toast({
         title: "Erro",
-        description: "Não foi possível gerar cartas para esta rodada.",
+        description: t('training.simulationMode.errorGeneratingCards'),
         variant: "destructive",
       });
       return;
@@ -121,14 +108,14 @@ export function TrainingSimulator({ cards, settings, onExit }: TrainingSimulator
       showFeedback: true,
       isCorrect,
       feedbackMessage: isCorrect 
-        ? `Correto! +10 pontos`
-        : `Incorreto! Era ${correctAnswer} elixir`,
+        ? t('training.simulationMode.correctGuess', { points: 10 })
+        : t('training.simulationMode.incorrectGuess', { answer: String(correctAnswer) }),
     }));
 
     if (!isCorrect && newCorrectAnswers < 3) {
       toast({
-        title: "Dica",
-        description: "Considere praticar mais na modalidade de memorização de elixir para melhorar seus conhecimentos!",
+        title: t('training.simulationMode.tipTitle'),
+        description: t('training.simulationMode.tipDescription'),
         variant: "default",
       });
     }
@@ -140,23 +127,14 @@ export function TrainingSimulator({ cards, settings, onExit }: TrainingSimulator
   const endGame = useCallback(() => {
     setGameState(prev => ({ ...prev, gameEnded: true }));
 
-    // Save session
-    saveSessionMutation.mutate({
-      mode: 'simulation',
-      score: gameState.score,
-      correctAnswers: gameState.correctAnswers,
-      totalQuestions: gameState.totalQuestions,
-      timeSpent: (gameState.totalQuestions * settings.timeLimit),
-    });
-
     if (gameState.correctAnswers > 0) {
       toast({
-        title: "Parabéns!",
-        description: `Sua mente está afiada! Score: ${gameState.score}`,
+        title: t('training.simulationMode.endGameCongrats'),
+        description: t('training.simulationMode.endGameScore', { score: gameState.score }),
         variant: "default",
       });
     }
-  }, [gameState, saveSessionMutation, settings.timeLimit, toast]);
+  }, [gameState.correctAnswers, gameState.score, t, toast]);
 
   // Timer for current round
   useEffect(() => {
@@ -175,7 +153,7 @@ export function TrainingSimulator({ cards, settings, onExit }: TrainingSimulator
             totalQuestions: prev.totalQuestions + 1,
             showFeedback: true,
             isCorrect: false,
-            feedbackMessage: `Tempo esgotado! Era ${correctAnswer} elixir`,
+            feedbackMessage: t('training.simulationMode.timesUp', { answer: String(correctAnswer) }),
           };
         }
         return { ...prev, timeLeft: prev.timeLeft - 1 };
@@ -217,16 +195,16 @@ export function TrainingSimulator({ cards, settings, onExit }: TrainingSimulator
               >
                 <ArrowLeft className="text-xl" />
               </Button>
-              <h2 className="text-xl font-bold text-white">Simulação de Elixir</h2>
+              <h2 className="text-xl font-bold text-white">{t('training.simulationMode.title')}</h2>
             </div>
           </div>
         </div>
 
         <div className="flex-1 flex items-center justify-center p-8">
           <div className="text-center space-y-8 max-w-md">
-            <h3 className="text-3xl font-bold text-white">Pronto para começar?</h3>
+            <h3 className="text-3xl font-bold text-white">{t('training.simulationMode.readyTitle')}</h3>
             <p className="text-game-text">
-              Cartas aparecerão na tela e você terá {settings.timeLimit} segundos para calcular quanto elixir sobra.
+              {t('training.simulationMode.readyDescription', { time: settings.timeLimit })}
             </p>
             <Button
               onClick={startNewRound}
@@ -234,7 +212,7 @@ export function TrainingSimulator({ cards, settings, onExit }: TrainingSimulator
               data-testid="button-start-game"
             >
               <Target className="mr-2" />
-              Começar Simulação
+              {t('training.simulationMode.start')}
             </Button>
           </div>
         </div>
@@ -247,33 +225,33 @@ export function TrainingSimulator({ cards, settings, onExit }: TrainingSimulator
       <div className="fixed inset-0 bg-game-dark z-50 flex flex-col">
         <div className="bg-game-card border-b border-game-muted p-4">
           <div className="max-w-4xl mx-auto flex justify-between items-center">
-            <h2 className="text-xl font-bold text-white">Resultado Final</h2>
+            <h2 className="text-xl font-bold text-white">{t('training.simulationMode.finalResult')}</h2>
             <Button
               onClick={onExit}
               variant="outline"
               data-testid="button-exit-final"
             >
-              Sair
+              {t('common.exit')}
             </Button>
           </div>
         </div>
 
         <div className="flex-1 flex items-center justify-center p-8">
           <div className="text-center space-y-8 max-w-md">
-            <h3 className="text-4xl font-bold text-white">Sessão Finalizada!</h3>
+            <h3 className="text-4xl font-bold text-white">{t('training.simulationMode.sessionOver')}</h3>
             <div className="space-y-4">
               <div className="bg-game-card p-6 rounded-xl">
                 <div className="text-3xl font-bold text-game-orange mb-2">{gameState.score}</div>
-                <div className="text-game-text">Pontos Totais</div>
+                <div className="text-game-text">{t('training.simulationMode.totalScore')}</div>
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div className="bg-game-card p-4 rounded-xl">
                   <div className="text-xl font-bold text-green-400">{gameState.correctAnswers}</div>
-                  <div className="text-sm text-game-text">Acertos</div>
+                  <div className="text-sm text-game-text">{t('training.simulationMode.correct')}</div>
                 </div>
                 <div className="bg-game-card p-4 rounded-xl">
                   <div className="text-xl font-bold text-blue-400">{gameState.totalQuestions}</div>
-                  <div className="text-sm text-game-text">Total</div>
+                  <div className="text-sm text-game-text">{t('training.simulationMode.total')}</div>
                 </div>
               </div>
             </div>
@@ -299,7 +277,7 @@ export function TrainingSimulator({ cards, settings, onExit }: TrainingSimulator
                 data-testid="button-play-again"
               >
                 <RotateCcw className="mr-2" />
-                Jogar Novamente
+                {t('training.simulationMode.playAgain')}
               </Button>
               <Button
                 onClick={onExit}
@@ -307,7 +285,7 @@ export function TrainingSimulator({ cards, settings, onExit }: TrainingSimulator
                 className="w-full"
                 data-testid="button-exit-game"
               >
-                Voltar ao Menu
+                {t('training.simulationMode.backToMenu')}
               </Button>
             </div>
           </div>
@@ -331,19 +309,19 @@ export function TrainingSimulator({ cards, settings, onExit }: TrainingSimulator
             >
               <ArrowLeft className="text-xl" />
             </Button>
-            <h2 className="text-xl font-bold text-white">Simulação de Elixir</h2>
+            <h2 className="text-xl font-bold text-white">{t('training.simulationMode.title')}</h2>
           </div>
           <div className="flex items-center space-x-6">
             <div className="text-center">
               <div className="text-2xl font-bold text-game-orange">{gameState.score}</div>
-              <div className="text-sm text-game-text">Pontos</div>
+              <div className="text-sm text-game-text">{t('training.simulationMode.score')}</div>
             </div>
             <div className="text-center">
               <div className="flex items-center">
                 <Clock className="h-4 w-4 text-blue-400 mr-1" />
                 <div className="text-2xl font-bold text-blue-400">{gameState.timeLeft}</div>
               </div>
-              <div className="text-sm text-game-text">Segundos</div>
+              <div className="text-sm text-game-text">{t('training.simulationMode.seconds')}</div>
             </div>
             <Button
               onClick={endGame}
@@ -351,7 +329,7 @@ export function TrainingSimulator({ cards, settings, onExit }: TrainingSimulator
               size="sm"
               data-testid="button-end-game"
             >
-              Parar
+              {t('training.simulationMode.stop')}
             </Button>
           </div>
         </div>
@@ -362,25 +340,25 @@ export function TrainingSimulator({ cards, settings, onExit }: TrainingSimulator
         <div className="text-center space-y-8 max-w-md">
           {/* Current Elixir Display */}
           <div className="mb-6">
-            <div className="text-lg text-game-text mb-2">Elixir do Adversário:</div>
+            <div className="text-lg text-game-text mb-2">{t('training.simulationMode.opponentElixir')}:</div>
             <div className="text-4xl font-bold text-purple-400">{gameState.currentElixir}</div>
           </div>
 
           {/* Current Cards */}
           <div className="space-y-4">
-            <div className="text-lg text-game-text">Cartas jogadas:</div>
+            <div className="text-lg text-game-text">{t('training.simulationMode.cardsPlayed')}:</div>
             <div className="flex justify-center space-x-4">
               {gameState.currentCards.map((card, index) => (
                 <div key={index} className="bg-game-card rounded-xl p-4 border border-game-muted">
-                  {card.imageUrl && (
+                  {card.iconUrls.medium && (
                     <img
-                      src={card.imageUrl}
-                      alt={language === 'pt-BR' ? card.name : card.nameEn}
+                      src={card.iconUrls.medium}
+                      alt={language === 'pt-BR' ? card.name : (card as any).nameEn || card.name}
                       className="w-24 h-32 object-cover rounded-lg mb-2"
                     />
                   )}
                   <div className="text-white font-semibold text-sm">
-                    {language === 'pt-BR' ? card.name : card.nameEn}
+                    {language === 'pt-BR' ? card.name : (card as any).nameEn || card.name}
                   </div>
                   {gameState.showFeedback && (
                     <div className="text-game-orange font-bold mt-1">{card.elixirCost}</div>
@@ -393,7 +371,7 @@ export function TrainingSimulator({ cards, settings, onExit }: TrainingSimulator
           {/* Question or Feedback */}
           {!gameState.showFeedback ? (
             <div className="space-y-4">
-              <p className="text-xl text-game-text">Quanto elixir sobra?</p>
+              <p className="text-xl text-game-text">{t('training.simulationMode.question')}</p>
               <div className="grid grid-cols-5 gap-3">
                 {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((value) => (
                   <Button
@@ -414,7 +392,7 @@ export function TrainingSimulator({ cards, settings, onExit }: TrainingSimulator
               </div>
               {countdownToNext > 0 && (
                 <div className="text-game-text">
-                  Próxima rodada em: <span className="font-bold">{countdownToNext}s</span>
+                  {t('training.simulationMode.nextRoundIn')}: <span className="font-bold">{countdownToNext}s</span>
                 </div>
               )}
               <Button
@@ -425,7 +403,7 @@ export function TrainingSimulator({ cards, settings, onExit }: TrainingSimulator
                 className="bg-game-orange hover:bg-game-orange/90"
                 data-testid="button-next-round"
               >
-                Próxima Rodada
+                {t('training.simulationMode.nextRound')}
               </Button>
             </div>
           )}
