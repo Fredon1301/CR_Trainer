@@ -177,7 +177,7 @@ export default function Landing() {
 
           <div className="border-t border-game-muted mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
             <p className="text-sm text-game-text">{t('landing.rightsReserved')}</p>
-            <p className="text-sm text-game-text mt-2 md:mt-0">
+                        {/* <p className="text-sm text-game-text mt-2 md:mt-0">
               {t('common.supercellDisclaimer').split('Supercell’s Fan Content Policy.').map((part, index) => (
                 <span key={index}>
                   {part}
@@ -193,7 +193,7 @@ export default function Landing() {
                   )}
                 </span>
               ))}
-            </p>
+            </p> */}
           </div>
         </div>
       </footer>
