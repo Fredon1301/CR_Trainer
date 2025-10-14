@@ -25,7 +25,7 @@ function Router() {
       <Route path="/home" component={Home} />
       <Route path="/cards" component={Cards} />
       <Route path="/training" component={Training} />
-      <Route path="/admin" component={Admin} />
+
       <Route path="/clans" component={Clans} />
       <Route path="/tournaments" component={Tournaments} />
       <Route path="/contact" component={Contact} />
