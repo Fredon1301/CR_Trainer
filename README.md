@@ -1,6 +1,6 @@
 # 👑 CR Trainer
 
-Um projeto simples de linha de comando (CLI) desenvolvido em Python para auxiliar jogadores de Clash Royale a memorizar cartas e realizar escolhas estratégicas rápidas durante batalhas.
+Um projeto simples desenvolvido em Python para auxiliar jogadores de Clash Royale a memorizar cartas e realizar escolhas estratégicas rápidas durante batalhas.
 
 Este projeto utiliza um arquivo CSV (`cards.csv`) para armazenar informações das cartas e oferece um modo de "treino" onde o usuário é testado sobre a melhor escolha de carta para neutralizar ameaças específicas.
 
@@ -52,3 +52,4 @@ Após a instalação, você pode iniciar o treinador:
 
 ```bash
 python cr_trainer.py
+
