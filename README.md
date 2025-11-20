@@ -6,9 +6,8 @@ Este projeto utiliza um arquivo CSV (`cards.csv`) para armazenar informações d
 
 ## 🌟 Funcionalidades
 
-* **Treino de Cartas:** O usuário escolhe uma carta, e o sistema pergunta qual seria a melhor contra-carta contra uma unidade específica (ex: qual a melhor contraofensiva para um Golem?).
+* **Treino de Cartas para Memorização:** O usuário escolhe uma carta, e o sistema pergunta qual o valor de elixir daquela carta
 * **Gestão de Cartas:** Permite adicionar, remover e visualizar cartas no banco de dados (`cards.csv`).
-* **Interface CLI:** Totalmente funcional via terminal, ideal para aprendizado rápido.
 * **Implementação em Python:** Fácil de entender e modificar.
 
 ## 🛠️ Tecnologias Utilizadas
@@ -52,4 +51,5 @@ Após a instalação, você pode iniciar o treinador:
 
 ```bash
 python cr_trainer.py
+
 
